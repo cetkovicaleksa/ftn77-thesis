@@ -26,7 +26,7 @@
   tables: counter(figure.where(kind: table)),
   listings: counter(figure.where(kind: raw)),
   algorithms: counter(figure.where(kind: "алгоритам")),
-  appendices: counter(heading.where(level: 1, supplement: [Додатак])),
+  appendices: context query(heading.where(level: 1, supplement: [Додатак])).len(),
   citations: context query(cite).dedup().len(),
   chapters: context query(heading.where(level: 1, supplement: [Поглавље])).len(),
   pages: context {

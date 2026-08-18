@@ -58,7 +58,7 @@
         )
       ],
       context [
-        #count.chapters/#count.pages/#count.citations/#count.tables.final().first()/#count.figures.final().first()/0/#count.appendices.final().first()
+        #count.chapters/#count.pages/#count.citations/#count.tables.final().first()/#count.figures.final().first()/0/#count.appendices
       ],
 
       [Scientific field, *SF*:], meta.en.field,
