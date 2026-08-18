@@ -23,4 +23,4 @@
 
 #include "thesis/main.typ"
 
-#bibliography("/thesis.bib", full: true)
+#bibliography("/thesis.bib", style: "/assets/csl/ieee.xml")
