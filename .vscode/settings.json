@@ -7,10 +7,15 @@
     "tinymist.projectResolution": "lockDatabase",
     "tinymist.rootPath": "${workspaceFolder}",
     "tinymist.outputPath": "$root/dist/$name",
-    "tinymist.systemFonts": false,
+    "tinymist.systemFonts": true,
     "tinymist.fontPaths": ["${workspaceFolder}/assets/fonts"],
     "tinymist.onPaste": "$root/assets/figures",
-    "tinymist.typstExtraArgs": ["--input","print=false","--input","duplex=true","--input","spiral=true"],
+    "tinymist.typstExtraArgs": [
+        "--input","print=false",
+        "--input","duplex=true",
+        "--input","spiral=true",
+        "--input","alt-cover=false",
+    ],
 
     "cSpell.checkOnlyEnabledFileTypes": true,
     "cSpell.enabledFileTypes": {
