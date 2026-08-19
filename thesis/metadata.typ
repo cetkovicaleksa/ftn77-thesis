@@ -7,7 +7,7 @@
     Систем за приватну анализу графова
     над екстерно складиштеним шифрованим подацима
     уз заштиту образаца приступа
-    примјеном ORAM механизма
+    примјеном #smallcaps[oram] механизма
   ],
   keywords: ("нешто", "нешто друго"),
   abstract: lorem(50),
@@ -51,7 +51,7 @@
       System for private graph analysis
       over externally stored encrypted data
       with access pattern protection
-      using ORAM mechanism
+      using #smallcaps[oram] mechanism
     ],
     keywords: ("something", "something else"),
     abstract: lorem(77),

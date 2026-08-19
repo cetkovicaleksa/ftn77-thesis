@@ -1,5 +1,5 @@
 #import sys.inputs.at("meta", default: "metadata.typ"): *
-#import sys.inputs.at("style", default: "style.typ") as style
+#import sys.inputs.at("style", default: "style.typ") as style: blue, dark-blue, gray, light-blue
 
 #let sr = text.with(lang: "sr", region: "RS")
 #let ср = sr
@@ -63,11 +63,6 @@
   width: auto,
   alt: "УНС лого",
 )
-
-#let blue = rgb("#00E1FDBA")
-#let dark-blue = rgb("#044B53")
-#let light-blue = rgb("#44bccc")
-#let gray = rgb("#E5E5E5")
 
 #let form-heading(
   body,
@@ -161,7 +156,6 @@
   ) // 2.5cm default margin
 
   show figure.where(kind: raw): set figure(supplement: [Листинг])
-  show figure.where(kind: table): set figure.caption(position: top)
 
   set heading(supplement: none)
 

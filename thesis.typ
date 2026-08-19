@@ -6,7 +6,10 @@
 
 #include "thesis/cover.typ"
 #include "thesis/front-matter/assignment.typ"
-#include "thesis/front-matter/outline.typ"
+#{
+  show: style.base
+  include "thesis/front-matter/outline.typ"
+}
 
 #section-break()
 #metadata("context counter(page).get().first()") <page-count-reset>
@@ -16,7 +19,11 @@
 
 #include "thesis/main.typ"
 
-#bibliography("/thesis.bib", style: "/assets/csl/ieee.xml")
+#{
+  show: style.base
+
+  bibliography("/My Library.bib", style: "/assets/csl/ieee.xml")
+}
 
 #include "thesis/back-matter/kwd.typ"
 #include "thesis/back-matter/kwd.en.typ"

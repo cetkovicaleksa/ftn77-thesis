@@ -11,14 +11,14 @@
 //   it
 // }
 
+#show: style.main
+
 #set page(
   numbering: "1",
 )
 
 #set heading(numbering: "1.a", supplement: [Потпоглавље])
 #show heading.where(level: 1): set heading(supplement: [Поглавље])
-
-#set par(justify: true)
 
 = Увод
 
