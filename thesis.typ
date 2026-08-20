@@ -22,7 +22,7 @@
 #{
   show: style.base
 
-  bibliography("/My Library.bib", style: "/assets/csl/ieee.xml")
+  bibliography("/thesis.bib", style: "/assets/csl/ieee.xml")
 }
 
 #include "thesis/back-matter/kwd.typ"
