@@ -17,7 +17,7 @@
   numbering: "1",
 )
 
-#set heading(numbering: "1.a", supplement: [Потпоглавље])
+#set heading(numbering: "1.1", supplement: [Потпоглавље])
 #show heading.where(level: 1): set heading(supplement: [Поглавље])
 
 = Увод

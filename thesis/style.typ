@@ -48,7 +48,7 @@
     number-align: center,
   )
   set text(
-    font: ("times new roman", "symbol", "wingdings"),
+    font: ("times new roman", "segoe ui symbol"),
     size: 11pt,
   )
   show raw: set text(font: "courier new", size: 10pt)
@@ -57,6 +57,7 @@
 
   show heading: set block(above: 2.2em, below: 1.1em)
   show heading.where(level: 1): set block(above: 3em, below: 1.5em)
+  show heading.where(level: 1): upper
 
   show heading: set text(fill: dark-blue, hyphenate: false, fractions: false)
   // show heading: h => smallcaps(lower(h))
@@ -82,7 +83,7 @@
     set text(style: "italic", size: 1em, number-type: "lining", fill: dark-blue.transparentize(32%))
 
     if odd {
-      align(right)[#hydra(1)]
+      align(right)[#upper[#hydra(1)]]
     } else {
       align(left)[#hydra(2)]
     }
