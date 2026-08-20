@@ -7,7 +7,7 @@
     Систем за приватну анализу графова
     над екстерно складиштеним шифрованим подацима
     уз заштиту образаца приступа
-    примјеном #smallcaps[oram] механизма
+    примјеном ORAM механизма
   ],
   keywords: ("нешто", "нешто друго"),
   abstract: lorem(50),
@@ -19,7 +19,12 @@
     name: "Милан Стојков",
   ),
   // cover-title: [],
-  assignment: lorem(80),
+  assignment: [
+    Задатак овог рада је дизајн, имплементација и евалуација система који омогућава извршавање
+    BFS алгоритма над шифрованим графом складиштеним на непоузданом серверу, тако да
+    серверу обрасци приступа не могу статистички да се разликују за различите полазне чворове,
+    уз примјену _Path_ ORAM механизма и додатних митигација за цурење кроз структуралне карактеристике графа.
+  ],
   year: datetime.today().year(),
 
   rbr: [0],
@@ -51,7 +56,7 @@
       System for private graph analysis
       over externally stored encrypted data
       with access pattern protection
-      using #smallcaps[oram] mechanism
+      using ORAM mechanism
     ],
     keywords: ("something", "something else"),
     abstract: lorem(77),
@@ -62,7 +67,6 @@
     mentor: (
       name: "Milan Stojkov",
     ),
-    assignment: lorem(80),
 
     td: [Monographic publication],
     tz: [Textual printed material],
