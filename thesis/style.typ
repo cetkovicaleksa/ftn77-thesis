@@ -31,12 +31,13 @@
   set page(footer: none, header: none)
   set text(font: ("arial", "segoe ui symbol"), size: 10pt, fallback: false)
 
+  set table(inset: .5em)
+
   body
 }
 
 #let form-heading(body) = {
-  set text(font: "arial", size: 10pt, fallback: false)
-  show heading: text.with(size: 14pt)
+  set text(font: "arial", size: 9.3pt, fallback: false)
 
   // show image: scale.with(80%, reflow: true)
 

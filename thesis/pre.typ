@@ -69,75 +69,129 @@
 ) = context {
   show: style.form-heading
   set heading(numbering: none, supplement: [Формулар], outlined: true, bookmarked: true)
-  // set text(size: 1em)
   show heading: upper
-  let inset = 1mm
+  let inset = 0.28em // 1mm on 10pt text
 
-  grid(
-    columns: (auto, 1fr),
-    rows: measure(ftn-logo).height / 2 + inset,
-    align: center + horizon,
-    stroke: 0.15em + black,
-    inset: inset,
+  layout(size => {
+    grid(
+      columns: (auto, 1fr),
+      rows: measure(ftn-logo).height / 2 + inset,
+      align: center + horizon,
+      stroke: 0.15em + black,
+      inset: inset,
 
-    grid.cell(
-      ftn-logo,
-      rowspan: 2,
-    ),
+      grid.cell(
+        ftn-logo,
+        rowspan: 2,
+      ),
 
-    pdf.artifact[
-      #stack(
-        dir: ttb,
-        spacing: 0.6em,
+      pdf.artifact[
+        #stack(
+          dir: ttb,
+          spacing: 0.6em,
 
-        ..if ("sr", "ba").contains(text.lang) {
-          (
-            upper[#text(weight: "light")[Универзитет у Новом Саду] *#sym.bullet Факултет техничких наука*],
-            text(weight: "light", tracking: 0.1em)[2100 НОВИ САД, Трг Доситеја Обрадовића 6],
-          )
-        } else {
-          (
-            upper[#text(weight: "light")[University of Novi Sad] *#sym.bullet Faculty of technical sciences*],
-            text(weight: "light", tracking: 0.1em)[21000 NOVI SAD, Trg Dositeja Obradovića 6],
-          )
-        },
-      )
-    ],
-    grid.cell(
-      fill: gray,
-    )[
-      // #body
-      // add supplement just to id form headings if needed
-      #heading[#body]
-    ],
-  )
+          ..if ("sr", "ba").contains(text.lang) {
+            (
+              upper[#text(weight: "light")[Универзитет у Новом Саду] #sym.circle.filled *Факултет техничких наука*],
+              text(weight: "light", tracking: 0.1em)[2100 НОВИ САД, Трг Доситеја Обрадовића 6],
+            )
+          } else {
+            (
+              upper[#text(weight: "light")[University of Novi Sad] #sym.circle.filled *Faculty of technical sciences*],
+              text(weight: "light", tracking: 0.1em)[21000 NOVI SAD, Trg Dositeja Obradovića 6],
+            )
+          },
+        )
+      ],
+      grid.cell(
+        fill: gray,
+      )[
+        // #body
+        // add supplement just to id form headings if needed
+        #heading[#body]
+      ],
+    )
+  })
 }
 
 #let assignment-form-heading(
   body,
 ) = {
   show: style.form-heading
-  // TODO: Add number and date on the side
-  form-heading[#body]
-  // table(
-  //   columns: (auto, auto),
-  //   rows: if ftn-logo.height != auto { ftn-logo.height / 4 + 1.2mm } else { auto },
-  //   stroke: none,
-  //   inset: 0pt,
 
-  //   form-heading(body),
-  //   table(
-  //     rows: (),
-  //     columns: 1,
-  //     stroke: 0.5mm + black,
-  //     inset: (left: 3em, right: 3em, top: 1.2mm, bottom: 1.2mm),
+  set heading(numbering: none, supplement: [Формулар], outlined: true, bookmarked: true)
+  show heading: upper
+  let inset = 0.28em // 1mm on 10pt text
+  let stroke = 1.5pt + black
 
-  //     [Број:],
-  //     sym.space,
-  //     [Датум:],
-  //     sym.space,
-  //   ),
-  // )
+  layout(size => {
+    grid(
+      columns: (auto, 1fr, 0.35fr),
+      rows: measure(ftn-logo).height / 2 + inset,
+      align: center + horizon,
+      stroke: stroke,
+      inset: inset,
+
+      grid.cell(
+        ftn-logo,
+        rowspan: 2,
+      ),
+
+      grid.cell(
+        rowspan: 2,
+        inset: 0pt,
+      )[
+        #grid(
+          rows: (1fr, 1fr),
+          columns: 1fr,
+          stroke: stroke,
+
+          pdf.artifact[
+            #stack(
+              dir: ttb,
+              spacing: 0.6em,
+
+              ..if ("sr", "ba").contains(text.lang) {
+                (
+                  upper[#text(weight: "light")[Универзитет у Новом Саду] #sym.circle.filled *Факултет техничких наука*],
+                  text(weight: "light", tracking: 0.1em)[2100 НОВИ САД, Трг Доситеја Обрадовића 6],
+                )
+              } else {
+                (
+                  upper[#text(weight: "light")[University of Novi Sad] #sym.circle.filled *Faculty of technical sciences*],
+                  text(weight: "light", tracking: 0.1em)[21000 NOVI SAD, Trg Dositeja Obradovića 6],
+                )
+              },
+            )
+          ],
+          grid.cell(
+            fill: gray,
+          )[
+            #heading[#body]
+          ],
+        )
+      ],
+
+      grid.cell(
+        rowspan: 2,
+        inset: 0pt,
+      )[
+        #table(
+          rows: (1fr,) * 4,
+          columns: 1fr,
+          stroke: stroke,
+          align: left,
+          // inset: (left: 3em, right: 3em),
+
+          // TODO: Maybe fill these two as well?
+          [Број:],
+          sym.space,
+          [Датум:],
+          sym.space,
+        )
+      ],
+    )
+  })
 }
 
 #let preamble(body) = {
