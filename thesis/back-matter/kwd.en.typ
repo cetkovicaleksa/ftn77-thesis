@@ -19,14 +19,16 @@
 #set text(size: 0.9em)
 
 #align(
-  center + bottom,
+  center,
 )[
   #block(
     stroke: (top: _solid, bottom: _solid),
     breakable: false,
+    height: 1fr,
   )[
     #table(
       columns: (1fr, 1.5fr),
+      rows: (auto,) * 22 + (0.9fr, auto),
       align: left + top,
       stroke: (
         (bottom: _dashed, right: _dashed),
