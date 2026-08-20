@@ -110,7 +110,7 @@
 ]
 
 #align(right)[
-  #text(size: 9pt)[
+  #text(size: 0.9em)[
     Образац *Q2.НА.04-03* - Издање 1
   ]
 ]

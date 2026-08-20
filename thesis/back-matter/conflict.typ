@@ -60,7 +60,7 @@
 #v(1fr)
 
 #align(right)[
-  #text(size: 9pt)[
+  #text(size: 0.75em)[
     Образац *Q2.НА.04-02* - Издање 1
   ]
 ]

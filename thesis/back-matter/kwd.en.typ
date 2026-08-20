@@ -109,7 +109,7 @@
 ]
 
 #align(right)[
-  #text(size: 9pt)[
+  #text(size: 1em)[
     Obrazac *Q2.НА.04-05* - Izdanje 1
   ]
 ]

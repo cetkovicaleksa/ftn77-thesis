@@ -108,7 +108,7 @@
 ]
 
 #align(right)[
-  #text(size: 9pt)[
+  #text(size: 1em)[
     Образац *Q2.НА.04-05* - Издање 1
   ]
 ]
