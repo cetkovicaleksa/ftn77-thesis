@@ -30,3 +30,9 @@
 = Додатак
 
 #lorem(100)
+
+#figure(
+  caption: [Опет нови ФТН лого],
+)[
+  #ftn-logo-new
+]

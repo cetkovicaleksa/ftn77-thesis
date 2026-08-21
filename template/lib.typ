@@ -46,6 +46,11 @@
     supplement: [Додатак],
   )
 
+  counter(figure).update(0)
+  set figure(
+    numbering: n => numbering("A.1", counter(heading).get().first(), n),
+  )
+
   [
     #state._appendices.final()
   ]
