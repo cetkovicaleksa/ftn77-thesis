@@ -2,7 +2,7 @@
 
 #import pre: *
 
-#import "thesis/metadata.typ": meta
+#import "metadata.typ": meta
 
 #show: thesis.with(
   ..meta,
