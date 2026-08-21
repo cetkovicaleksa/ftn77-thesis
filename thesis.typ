@@ -1,30 +1,32 @@
-#import "thesis/pre.typ": *
+#import "template/lib.typ": appendices, bibliography, ftn-logo-new, pre, thesis
 
-#show: preamble
+#import pre: *
 
-#set page(numbering: "i")
+#import "thesis/metadata.typ": meta
 
-#include "thesis/cover.typ"
-#include "thesis/front-matter/assignment.typ"
-#{
-  show: style.base
-  include "thesis/front-matter/outline.typ"
-}
+#show: thesis.with(
+  ..meta,
+  new-cover: "new-cover" in sys.inputs,
+  bibliography: bibliography("thesis.bib", full: true),
+)
 
-#section-break()
-#metadata("context counter(page).get().first()") <page-count-reset>
-#counter(page).update(1)
+= Увод
 
-#set page(numbering: "1")
+#lorem(10)
 
-#include "thesis/main.typ"
+#ен[Some text in English] @goldreich_software_1996
 
-#{
-  show: style.base
+#figure(
+  caption: [Нови ФТН лого],
+)[
+  #ftn-logo-new
+]
+<fig:ftn-logo-new>
 
-  bibliography("/thesis.bib", style: "/assets/csl/ieee.xml")
-}
+#lorem(100)
 
-#include "thesis/back-matter/kwd.typ"
-#include "thesis/back-matter/kwd.en.typ"
-#include "thesis/back-matter/conflict.typ"
+#show: appendices
+
+= Додатак
+
+#lorem(100)

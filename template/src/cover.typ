@@ -1,13 +1,19 @@
-#import "pre.typ": *
+#import "../style.typ" as style
+#import "common.typ": ftn-logo, ftn-logo-new, uns-logo
 
-#show: preamble
+#let cover(
+  title: auto,
+  author: (name: auto),
+  degree: [Основне академске студије],
+  date: auto,
+) = [
+  #let name = if author.name == auto { context document.author.first(default: [Именко Презимић]) } else { author.name }
+  #let year = context if date == auto {
+    if document.date != auto { document.date } else { datetime.today() }.display("[year]")
+  } else {
+    date.display("[year]")
+  }
 
-// include cover as level 1 heading toc and bookmark entry
-#show heading: place.with(top + center)
-#show heading: none
-#heading(numbering: none)[Насловна страна] // TODO: Should there be a separate (actual) title page
-
-#let cover() = [
   #show: style.cover
 
   #grid(
@@ -33,12 +39,10 @@
   )
 
   #v(1fr)
-  #pad(left: 3%)[#meta.author.name]
+  #pad(left: 3%)[#name]
 
   #v(.7fr)
-  #std.title[
-    #meta.at("cover-title", default: meta.title)
-  ]
+  #std.title(title)
 
   #v(1fr)
   #align(center)[
@@ -46,15 +50,27 @@
       dir: ttb,
       spacing: 1em,
       upper[завршни рад],
-      emph[-- #meta.at("degree", default: "Основне академске студије") --],
+      emph[-- #degree --],
     )
   ]
 
   #v(1fr)
-  #align(bottom + center)[Нови Сад, #meta.year]
+  #align(bottom + center)[Нови Сад, #year]
 ]
 
-#let cover-new() = [
+#let cover-new(
+  title: auto,
+  author: (name: auto),
+  degree: [Основне академске студије],
+  date: auto,
+) = [
+  #let name = if author.name == auto { context document.author.first(default: [Именко Презимић]) } else { author.name }
+  #let year = context if date == auto {
+    if document.date != auto { document.date } else { datetime.today() }.display("[year]")
+  } else {
+    date.display("[year]")
+  }
+
   #show: style.cover
 
   #place(top + center, float: true)[
@@ -78,12 +94,10 @@
   ]
 
   #v(1fr)
-  #pad(left: 3%)[#meta.author.name]
+  #pad(left: 3%)[#name]
 
   #v(.7fr)
-  #std.title[
-    #meta.title
-  ]
+  #std.title(title)
 
   #v(1fr)
   #align(center)[
@@ -91,16 +105,10 @@
       dir: ttb,
       spacing: 1em,
       upper[завршни рад],
-      emph[-- #meta.degree --],
+      emph[-- #degree --],
     )
   ]
 
   #v(1fr)
-  #align(bottom + center)[Нови Сад, #meta.year]
+  #align(bottom + center)[Нови Сад, #year]
 ]
-
-#if sys.inputs.at("alt-cover", default: "false") == "true" {
-  cover-new()
-} else {
-  cover()
-}

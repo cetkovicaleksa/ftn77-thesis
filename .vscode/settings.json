@@ -11,10 +11,8 @@
     "tinymist.fontPaths": ["${workspaceFolder}/assets/fonts"],
     "tinymist.onPaste": "$root/assets/figures",
     "tinymist.typstExtraArgs": [
-        "--input","print=false",
-        "--input","duplex=true",
-        "--input","spiral=true",
-        "--input","alt-cover=false",
+        "--input","duplex=indeed",
+        "--input","new-cover=maybe",
     ],
 
     "cSpell.checkOnlyEnabledFileTypes": true,
