@@ -1,5 +1,4 @@
 #import "src/state.typ" as state
-#import "src/pre.typ" as pre
 #import "src/common.typ": sr-numbering
 #import "src/components.typ": assignment-form-heading, form-heading, ftn-logo, ftn-logo-new, section-break, uns-logo
 #import "style.typ" as style
@@ -99,6 +98,8 @@
   )
 
   show figure.where(kind: raw): set figure(supplement: [Листинг]) // use "listing" instead of "kod"
+  show figure.where(kind: "график"): set figure(supplement: [График])
+  show figure.where(kind: "алгоритам"): set figure(supplement: [Алгоритам])
 
   set text(
     lang: "sr",

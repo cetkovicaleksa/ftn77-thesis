@@ -96,7 +96,7 @@
         ],
         if physical == auto {
           context [
-            #state.chapters/#state.pages/#state.citations/#state.tables.final().first()/#state.figures.final().first()/0/#state.appendices
+            #state.chapters/#state.pages/#state.citations/#state.tables/#state.images/#state.graphs/#state.appendices
           ]
         } else { physical },
 
@@ -242,7 +242,7 @@
         ],
         if physical == auto {
           context [
-            #state.chapters/#state.pages/#state.citations/#state.tables.final().first()/#state.figures.final().first()/0/#state.appendices
+            #state.chapters/#state.pages/#state.citations/#state.tables/#state.images/#state.graphs/#state.appendices
           ]
         } else { physical },
 

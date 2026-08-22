@@ -8,7 +8,8 @@
 
   #std.outline()
   #std.outline(title: [Списак слика], target: figure.where(kind: image))
-  #std.outline(title: [Списак листинга], target: figure.where(kind: raw))
   #std.outline(title: [Списак табела], target: figure.where(kind: table))
+  #std.outline(title: [Списак листинга], target: figure.where(kind: raw))
+  #std.outline(title: [Списак графика], target: figure.where(kind: "график"))
   #std.outline(title: [Списак алгоритама], target: figure.where(kind: "алгоритам"))
 ]
