@@ -1,6 +1,6 @@
 #import "src/state.typ" as state
 #import "src/pre.typ" as pre
-#import "src/common.typ": assignment-form-heading, form-heading, ftn-logo, ftn-logo-new, section-break, uns-logo
+#import "src/components.typ": assignment-form-heading, form-heading, ftn-logo, ftn-logo-new, section-break, uns-logo
 #import "style.typ" as style
 
 #import "src/cover.typ": cover, cover-new

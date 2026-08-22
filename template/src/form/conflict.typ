@@ -1,5 +1,5 @@
 #import "../../style.typ" as style
-#import "../common.typ": form-heading, section-break
+#import "../components.typ": form-heading, section-break
 
 #let conflict() = [
   #show: style.form

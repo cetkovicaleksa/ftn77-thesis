@@ -1,5 +1,5 @@
 #import "../style.typ" as style
-#import "common.typ": ftn-logo, ftn-logo-new, uns-logo
+#import "components.typ": ftn-logo, ftn-logo-new, uns-logo
 
 #let cover(
   title: auto,

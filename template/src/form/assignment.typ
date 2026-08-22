@@ -1,4 +1,4 @@
-#import "../common.typ": assignment-form-heading, section-break
+#import "../components.typ": assignment-form-heading, section-break
 #import "../../style.typ" as style: gray
 
 #let _hairline = black + 0.05pt

@@ -1,4 +1,4 @@
-#import "../common.typ": form-heading, section-break
+#import "../components.typ": form-heading, section-break
 #import "../state.typ" as state
 #import "../../style.typ" as style
 
