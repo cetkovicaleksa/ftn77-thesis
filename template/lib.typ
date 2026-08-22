@@ -176,10 +176,10 @@
 
     show-appendices()
 
-    if bio != none [
+    if type(bio) == str [
       = Биографија
       #bio
-    ]
+    ] else { bio }
   }
 
   kwd(
