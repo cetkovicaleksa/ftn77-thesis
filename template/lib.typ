@@ -1,5 +1,6 @@
 #import "src/state.typ" as state
 #import "src/pre.typ" as pre
+#import "src/common.typ": sr-numbering
 #import "src/components.typ": assignment-form-heading, form-heading, ftn-logo, ftn-logo-new, section-break, uns-logo
 #import "style.typ" as style
 
@@ -42,13 +43,12 @@
 #let show-appendices() = context {
   counter(heading).update(0)
   set heading(
-    numbering: "A.1",
+    numbering: sr-numbering,
     supplement: [Додатак],
   )
 
-  counter(figure).update(0)
   set figure(
-    numbering: n => numbering("A.1", counter(heading).get().first(), n),
+    numbering: n => sr-numbering(counter(heading).get().first(), n),
   )
 
   [
@@ -113,8 +113,25 @@
     if h1.supplement != [Формулар] {
       section-break()
     }
+
     h1
   }
+
+  // reset figure counters each chapter/appendix
+  show heading.where(level: 1): h1 => {
+    counter(figure.where(kind: image)).update(0)
+    counter(figure.where(kind: table)).update(0)
+    counter(figure.where(kind: raw)).update(0)
+    counter(figure.where(kind: "алгоритам")).update(0)
+
+    h1
+  }
+
+  // figure numbered as <h1 count>.<count>
+  // no figures shall be used outside main/appendices
+  set figure(
+    numbering: n => numbering("1.1", counter(heading).get().first(), n),
+  )
 
   set page(numbering: "i")
 
