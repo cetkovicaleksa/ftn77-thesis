@@ -1,3 +1,5 @@
+#import "src/common.typ": sr-numbering
+
 #let cyan = rgb("41BACB")
 #let blue = rgb("044B53")
 #let teal = rgb("44BCCC")
@@ -79,9 +81,39 @@
     11pt,
     font: ("Times New Roman", "Liberation Serif", "Libertinus Serif", "Segoe UI Symbol", "Noto Sans Symbols2"),
   )
-  show raw: set text(font: "Courier New", size: 10pt)
+  show raw: set text(10pt, font: "Courier New")
   set raw(theme: "assets/theme/GitHub Light.tmTheme")
   show math.equation: set text(font: "Cambria Math", fallback: false)
+
+  show outline.entry: it => {
+    show repeat: set text(blue, font: ("Cambria Math", "Times New Roman")) // cambria uses squared dots
+
+    if it.element.func() == heading {
+      it
+    } else {
+      // figures
+      link(
+        it.element.location(),
+        it.indented(
+          text(weight: "medium")[#it.prefix()],
+          it.inner(),
+        ),
+      )
+    }
+  }
+  show link: it => {
+    if type(it.dest) == str {
+      set text(blue)
+      it
+    } else {
+      it
+    }
+  }
+  show footnote: set text(blue)
+  show footnote.entry: it => {
+    show regex("^\d+\b"): set text(blue)
+    it
+  }
 
   show heading: set text(hyphenate: false)
   show heading: set block(above: 2.2em, below: 1.1em)
@@ -95,9 +127,36 @@
 
   show figure.where(kind: table): set figure.caption(position: top)
 
+  show figure.caption: it => [
+    #show strong: it => text(weight: "medium")[#it.body]
+    #set terms(separator: sym.colon + h(0.3em), tight: true)
+
+    / #it.supplement #it.counter.display(): #it.body
+  ]
+
   show figure: set block(
     above: 2em,
     below: 2em,
+  )
+
+  show table: set text(number-type: "lining", number-width: "tabular")
+  set table(fill: (_, y) => if y == 0 { gray })
+  show table: set align(center)
+
+  show table.cell.where(y: 0): set text(weight: "semibold", features: ("smcp",))
+
+  show heading.where(numbering: "1.1"): set heading(
+    numbering: (..nums) => {
+      numbering("1.1", ..nums)
+      h(0.3em)
+    },
+  )
+
+  show heading.where(numbering: sr-numbering): set heading(
+    numbering: (..nums) => {
+      sr-numbering(..nums)
+      h(0.3em)
+    },
   )
 
   body
@@ -112,10 +171,12 @@
     let odd = calc.odd(here().page())
 
     set align(if odd { right } else { left })
-    set text(style: "italic", fill: text.fill.transparentize(50%))
+    set text(0.9em, style: "italic", blue.transparentize(32%))
 
     hydra(if odd { 1 } else { 2 })
   })
+
+  // show heading.where(level: 1): set block(inset: (y: 0.77em), stroke: (top: blue, bottom: blue), width: 100%)
 
   body
 }
