@@ -16,7 +16,7 @@
   ),
   // cover-title: [], // use \ to explicitly break the title into rows if needed
   assignment-text: lorem(50),
-  date: auto,
+  date: datetime(day: 1, month: 8, year: 2049),
 
   accession-number: 0,
   identification-number: 0,
@@ -86,7 +86,7 @@
       president: sym.space,
       member1: sym.space,
       member2: sym.space,
-      mentor: [Milan Stojkov, Phd, assist. professor],
+      mentor: [Ranko Prezimić, Phd, professor],
     ),
   ),
 )

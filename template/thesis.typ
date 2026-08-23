@@ -1,13 +1,15 @@
-#import "@local/ftn77:0.1.0": appendices, bibliography, ftn-logo-new, thesis
+#import "../lib.typ": appendices, bibliography, ftn-logo-new, thesis
 
 #import "metadata.typ": meta
+#import "style.typ" as style
 
 #show: thesis.with(
   ..meta,
   paper: "a4",
   // margin: 2cm,
+  duplex: true,
   bibliography: bibliography("thesis.bib"), // uses ieee with custom serbian cyrl translations by default
-  // style: style,
+  style: style,
 )
 
 = Увод

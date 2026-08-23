@@ -1,9 +1,9 @@
 [package]
-name = "ftn77"
+name = "ftn77-thesis"
 version = "0.1.0"
 compiler = "0.15.0"
 entrypoint = "lib.typ"
-repository = "https://github.com/cetkovicaleksa/oram"
+repository = "https://github.com/cetkovicaleksa/ftn77-thesis"
 authors = ["Алекса Ћетковић <cetkovic.sv77.2022@uns.ac.rs>"]
 license = "CC BY-NC-SA 4.0"
 description = "Unoffical template for writing a bsc/ms thesis on Faculty of Technical Sciences (FTN), University of Novi Sad. Custom built and not yet approved by my mentor. Will be updated as i work on my thesis."

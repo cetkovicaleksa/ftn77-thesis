@@ -6,10 +6,9 @@
     "tinymist.formatterMode": "typstyle",
     "tinymist.projectResolution": "lockDatabase",
     "tinymist.rootPath": "${workspaceFolder}",
-    "tinymist.outputPath": "$root/dist/$name",
+    // "tinymist.outputPath": "$root/dist/$name",
     "tinymist.systemFonts": true,
     "tinymist.fontPaths": ["${workspaceFolder}/assets/fonts"],
-    "tinymist.onPaste": "$root/assets/figures",
     "tinymist.typstExtraArgs": [],
 
     "cSpell.checkOnlyEnabledFileTypes": true,

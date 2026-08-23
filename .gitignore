@@ -1,3 +1,4 @@
 dist/
 tinymist.lock
 *.pdf
+!thesis.pdf

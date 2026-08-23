@@ -9,8 +9,8 @@
   style: style,
 ) = [
   #let name = if author.name == auto { context document.author.first(default: [Именко Презимић]) } else { author.name }
-  #let year = context if date == auto {
-    if document.date != auto { document.date } else { datetime.today() }.display("[year]")
+  #let year = if date == auto {
+    context if document.date != auto { document.date } else { datetime.today() }.display("[year]")
   } else {
     date.display("[year]")
   }
@@ -67,8 +67,8 @@
   style: style,
 ) = [
   #let name = if author.name == auto { context document.author.first(default: [Именко Презимић]) } else { author.name }
-  #let year = context if date == auto {
-    if document.date != auto { document.date } else { datetime.today() }.display("[year]")
+  #let year = if date == auto {
+    context if document.date != auto { document.date } else { datetime.today() }.display("[year]")
   } else {
     date.display("[year]")
   }

@@ -90,7 +90,10 @@
 
   set heading(supplement: none)
 
-  let _pagebreak = pagebreak.with(weak: true, to: if duplex { "odd" } else { none })
+  let _pagebreak(weak: true, to: if duplex { "odd" } else { none }) = {
+    set page(header: none, footer: none)
+    pagebreak(weak: weak, to: to)
+  }
 
   // auto pagebreak on h1
   show heading.where(level: 1, outlined: true): h1 => {
