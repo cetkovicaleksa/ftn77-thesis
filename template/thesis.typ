@@ -1,4 +1,4 @@
-#import "../lib.typ": appendices, bibliography, ftn-logo-new, thesis
+#import "@local/ftn77-thesis:0.1.0": appendices, bibliography, ftn-logo-new, thesis
 
 #import "metadata.typ": meta
 #import "style.typ" as style

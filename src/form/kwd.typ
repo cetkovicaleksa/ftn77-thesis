@@ -122,10 +122,10 @@
             [Члан, ментор:],
           )
         ],
-        defense.president,
-        defense.member1,
-        defense.member2,
-        defense.mentor,
+        defense.president + pdf.artifact(sym.zws),
+        defense.member1 + pdf.artifact(sym.zws),
+        defense.member2 + pdf.artifact(sym.zws),
+        defense.mentor + pdf.artifact(sym.zws),
       )
 
       #place(
@@ -268,10 +268,10 @@
             [Member, Mentor:],
           )
         ],
-        defense.president,
-        defense.member1,
-        defense.member2,
-        defense.mentor,
+        defense.president + pdf.artifact(sym.zws),
+        defense.member1 + pdf.artifact(sym.zws),
+        defense.member2 + pdf.artifact(sym.zws),
+        defense.mentor + pdf.artifact(sym.zws),
       )
 
       #place(
