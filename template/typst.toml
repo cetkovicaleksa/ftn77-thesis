@@ -1,0 +1,17 @@
+[package]
+name = "ftn77"
+version = "0.1.0"
+compiler = "0.15.0"
+entrypoint = "lib.typ"
+repository = "https://github.com/cetkovicaleksa/oram"
+authors = ["Алекса Ћетковић <cetkovic.sv77.2022@uns.ac.rs>"]
+license = "CC BY-NC-SA 4.0"
+description = "Unoffical template for writing a bsc/ms thesis on Faculty of Technical Sciences (FTN), University of Novi Sad. Custom built and not yet approved by my mentor. Will be updated as i work on my thesis."
+keywords = ["ftn", "фтн", "diplomski rad", "дипломски рад", "master rad","мастер рад"]
+categories = ["thesis"]
+exclude = ["thesis.pdf"]
+
+[template]
+path = "template"
+entrypoint = "thesis.typ"
+thumbnail = "thumbnail.png"
