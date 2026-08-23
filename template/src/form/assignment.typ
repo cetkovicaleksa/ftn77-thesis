@@ -1,5 +1,5 @@
-#import "../components.typ": assignment-form-heading, section-break
-#import "../../style.typ" as style: gray
+#import "../components.typ": assignment-form-heading
+#import "../../style.typ" as style
 
 #let _hairline = black + 0.05pt
 #let _very_thin = black + 0.5pt
@@ -15,12 +15,13 @@
   mentor: (:),
   date: sym.space,
   number: sym.space,
+  style: style,
 ) = [
+  #import style: gray
   #show: style.form
   #set text(lang: "sr", region: "RS")
 
-  #section-break()
-  #assignment-form-heading[Задатак за завршни рад]
+  #assignment-form-heading(style: style)[Задатак за завршни рад]
 
   #set list(marker: "-", indent: 1.5em, body-indent: 1.5em)
   #set table(stroke: _hairline)

@@ -1,4 +1,4 @@
-#import "src/common.typ": sr-numbering
+#import "src/common.typ" as _common
 
 #let cyan = rgb("41BACB")
 #let blue = rgb("044B53")
@@ -95,7 +95,7 @@
       link(
         it.element.location(),
         it.indented(
-          text(weight: "medium")[#it.prefix()],
+          text(blue, weight: "medium")[#it.prefix()],
           it.inner(),
         ),
       )
@@ -115,7 +115,7 @@
     it
   }
 
-  show heading: set text(hyphenate: false)
+  show heading: set text(blue, hyphenate: false, number-type: "lining")
   show heading: set block(above: 2.2em, below: 1.1em)
   show heading.where(level: 1): set block(above: 3em, below: 1.5em)
   show heading.where(level: 1): upper
@@ -128,7 +128,7 @@
   show figure.where(kind: table): set figure.caption(position: top)
 
   show figure.caption: it => [
-    #show strong: it => text(weight: "medium")[#it.body]
+    #show strong: it => text(blue, weight: "medium")[#it.body]
     #set terms(separator: sym.colon + h(0.3em), tight: true)
 
     / #it.supplement #it.counter.display(): #it.body
@@ -152,9 +152,9 @@
     },
   )
 
-  show heading.where(numbering: sr-numbering): set heading(
+  show heading.where(numbering: _common.sr-numbering): set heading(
     numbering: (..nums) => {
-      sr-numbering(..nums)
+      _common.sr-numbering(..nums)
       h(0.3em)
     },
   )

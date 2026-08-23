@@ -1,6 +1,6 @@
 #import "src/state.typ" as state
 #import "src/common.typ": sr-numbering
-#import "src/components.typ": assignment-form-heading, form-heading, ftn-logo, ftn-logo-new, section-break, uns-logo
+#import "src/components.typ": assignment-form-heading, form-heading, ftn-logo, ftn-logo-new, uns-logo
 #import "style.typ" as style
 
 #import "src/cover.typ": cover, cover-new
@@ -12,27 +12,6 @@
 
 #let bibliography = std.bibliography.with(style: "assets/csl/ieee.xml")
 
-
-#let main(body) = {
-  show: style.main
-
-  section-break()
-  [
-    #metadata("This is where front-matter ends right before page counter is reset") <meta:front-matter-end>
-  ]
-  counter(page).update(1)
-
-  set heading(numbering: "1.1", supplement: [Потпоглавље]) // Одјељак?
-  show heading.where(level: 1): set heading(supplement: [Поглавље])
-
-  show: style.main
-
-  body
-
-  // [
-  //   #metadata("This is where main content ends") <meta:main-end>
-  // ]
-}
 
 #let appendices(body) = context {
   state._appendices.update(state._appendices.get() + body)
@@ -65,6 +44,7 @@
     name: "Ранко Презимић",
   ),
   keywords: (),
+  abstract: none,
   program: [],
   degree: [Основне академске студије],
   field: [],
@@ -79,9 +59,11 @@
 
   bibliography: none,
   paper: "a4",
-  margin: 2cm,
+  margin: (x: 2cm, y: 2.5cm),
   new-cover: false,
+  duplex: false,
 
+  style: style,
   body,
   ..args,
 ) = {
@@ -108,11 +90,13 @@
 
   set heading(supplement: none)
 
+  let _pagebreak = pagebreak.with(weak: true, to: if duplex { "odd" } else { none })
+
   // auto pagebreak on h1
   show heading.where(level: 1, outlined: true): h1 => {
     // quick patch up
     if h1.supplement != [Формулар] {
-      section-break()
+      _pagebreak()
     }
 
     h1
@@ -123,6 +107,7 @@
     counter(figure.where(kind: image)).update(0)
     counter(figure.where(kind: table)).update(0)
     counter(figure.where(kind: raw)).update(0)
+    counter(figure.where(kind: "график")).update(0)
     counter(figure.where(kind: "алгоритам")).update(0)
 
     h1
@@ -145,8 +130,10 @@
     author: author,
     date: date,
     degree: degree,
+    style: style,
   )
 
+  _pagebreak()
   assignment(
     title: title,
     text_: assignment-text,
@@ -155,6 +142,7 @@
     field: field,
     author: author,
     mentor: mentor,
+    style: style,
   )
 
   {
@@ -168,7 +156,17 @@
   {
     show: style.base
     {
-      show: main
+      _pagebreak()
+      [
+        #metadata("This is where front-matter ends right before page counter is reset") <meta:front-matter-end>
+      ]
+      counter(page).update(1)
+
+      set heading(numbering: "1.1", supplement: [Потпоглавље]) // Одјељак?
+      show heading.where(level: 1): set heading(supplement: [Поглавље])
+
+      show: style.main
+
       body
     }
 
@@ -182,6 +180,7 @@
     ] else { bio }
   }
 
+  _pagebreak()
   kwd(
     title: title,
     author: author,
@@ -189,10 +188,16 @@
     field: field,
     discipline: discipline,
     program: program,
+    style: style,
     ..args,
   )
 
-  kwd-en(..en)
+  _pagebreak()
+  kwd-en(
+    style: style,
+    ..en,
+  )
 
-  conflict()
+  _pagebreak()
+  conflict(style: style)
 }

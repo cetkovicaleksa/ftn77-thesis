@@ -1,12 +1,13 @@
 #import "../../style.typ" as style
-#import "../components.typ": form-heading, section-break
+#import "../components.typ": form-heading
 
-#let conflict() = [
+#let conflict(
+  style: style,
+) = [
   #show: style.form
   #set text(lang: "sr", region: "RS")
 
-  #section-break()
-  #form-heading[Изјава о непостојању сукоба интереса]
+  #form-heading(style: style)[Изјава о непостојању сукоба интереса]
 
   #set text(size: 1.2em)
   #set line(stroke: .7pt + black)

@@ -6,6 +6,7 @@
   author: (name: auto),
   degree: [Основне академске студије],
   date: auto,
+  style: style,
 ) = [
   #let name = if author.name == auto { context document.author.first(default: [Именко Презимић]) } else { author.name }
   #let year = context if date == auto {
@@ -63,6 +64,7 @@
   author: (name: auto),
   degree: [Основне академске студије],
   date: auto,
+  style: style,
 ) = [
   #let name = if author.name == auto { context document.author.first(default: [Именко Презимић]) } else { author.name }
   #let year = context if date == auto {

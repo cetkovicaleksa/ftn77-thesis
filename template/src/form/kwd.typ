@@ -1,4 +1,4 @@
-#import "../components.typ": form-heading, section-break
+#import "../components.typ": form-heading
 #import "../state.typ" as state
 #import "../../style.typ" as style
 
@@ -41,13 +41,13 @@
     member2: sym.space,
     mentor: sym.space,
   ),
+  style: style,
   ..sink,
 ) = [
   #show: style.form
   #set text(lang: "sr", region: "RS")
 
-  #section-break()
-  #form-heading[Кључна документација информација]
+  #form-heading(style: style)[Кључна документација информација]
 
   #set par(justify: true)
 
@@ -187,13 +187,13 @@
     member2: sym.space,
     mentor: sym.space,
   ),
+  style: style,
   ..sink,
 ) = [
   #show: style.form
   #set text(lang: "en", region: "UK")
 
-  #section-break()
-  #form-heading[Key Words Documentation]
+  #form-heading(style: style)[Key Words Documentation]
 
   #set par(justify: true)
 

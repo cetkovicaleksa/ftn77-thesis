@@ -1,4 +1,4 @@
-#import "../style.typ" as style: gray
+#import "../style.typ" as style
 
 #let ftn-logo = image(
   "../assets/logo/ftn-logo-light.svg",
@@ -22,8 +22,10 @@
 )
 
 #let form-heading(
+  style: style,
   body,
 ) = context {
+  import style: gray
   show: style.form-heading
 
   set heading(numbering: none, supplement: [Формулар], outlined: true, bookmarked: true)
@@ -75,8 +77,10 @@
 #let assignment-form-heading(
   number: sym.space,
   date: sym.space,
+  style: style,
   body,
 ) = {
+  import style: gray
   show: style.form-heading
 
   set heading(numbering: none, supplement: [Формулар], outlined: true, bookmarked: true)
@@ -152,14 +156,4 @@
       ],
     )
   })
-}
-
-#let is-duplex = "duplex" in sys.inputs
-#let _pagebreak = pagebreak.with(weak: true, ..if is-duplex {
-  (to: "odd")
-} else { (:) })
-
-#let section-break() = {
-  set page(header: none, footer: none)
-  _pagebreak()
 }
