@@ -187,6 +187,7 @@
     mentor: mentor,
     field: field,
     discipline: discipline,
+    abstract: abstract,
     program: program,
     style: style,
     ..args,
