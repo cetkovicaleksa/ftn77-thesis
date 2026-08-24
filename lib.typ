@@ -1,7 +1,12 @@
 #import "src/state.typ" as state
 #import "src/common.typ": sr-numbering
-#import "src/components.typ": assignment-form-heading, form-heading, ftn-logo, ftn-logo-new, uns-logo
+#import "src/components.typ": (
+  assignment-form-heading, form-heading, ftn-logo, ftn-logo-new, uns-logo,
+)
 #import "style.typ" as style
+#import "src/pre.typ" as pre
+#import "src/glossary.typ" as glossary
+#let _gls = glossary
 
 #import "src/cover.typ": cover, cover-new
 #import "src/outline.typ": outline
@@ -52,6 +57,9 @@
   assignment-text: lorem(50),
   date: auto,
   bio: none,
+  glossary: (:),
+  glossary-links: false,
+  glossary-all: false,
 
   en: (
     keywords: (),
@@ -148,10 +156,16 @@
     style: style,
   )
 
+  show: _gls.init-glossary.with(glossary, term-links: glossary-links)
+
   {
     show: style.base
 
     outline()
+
+    _gls.glossary(
+      show-all: glossary-all,
+    )
   }
 
   set page(numbering: "1")
@@ -161,7 +175,8 @@
     {
       _pagebreak()
       [
-        #metadata("This is where front-matter ends right before page counter is reset") <meta:front-matter-end>
+        #metadata("This is where front-matter ends right before page counter is reset")
+        <meta:front-matter-end>
       ]
       counter(page).update(1)
 

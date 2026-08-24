@@ -1,5 +1,5 @@
 #let outline() = [
-  #show std.outline: it => if query(it.target).len() > 0 { it } // hide outline if no entries
+  #show std.outline: it => if query(it.target).filter(t => t.outlined).len() > 0 { it } // hide outline if no entries
   #show std.outline: set heading(level: 1, outlined: true, bookmarked: true)
 
   #set footnote.entry(separator: none)

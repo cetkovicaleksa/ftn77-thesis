@@ -24,7 +24,7 @@
 
   show title: block.with(width: 90%)
   show title: align.with(center)
-  show title: set text(17pt)
+  show title: set text(17pt, font: ("arial", "liberation sans", "libertinus sans"))
   show title: set par(justify: false)
 
   // show logos a bit smaller than usual
@@ -79,11 +79,17 @@
 #let base(body) = {
   set text(
     11pt,
-    font: ("Times New Roman", "Liberation Serif", "Libertinus Serif", "Segoe UI Symbol", "Noto Sans Symbols2"),
+    font: (
+      "Times New Roman",
+      "Liberation Serif",
+      "Libertinus Serif",
+      "Segoe UI Symbol",
+      "Noto Sans Symbols2",
+    ),
   )
   show raw: set text(10pt, font: "Courier New")
   set raw(theme: "assets/theme/GitHub Light.tmTheme")
-  show math.equation: set text(font: "Cambria Math", fallback: false)
+  show math.equation: set text(font: "Cambria Math")
 
   show outline.entry: it => {
     show repeat: set text(blue, font: ("Cambria Math", "Times New Roman")) // cambria uses squared dots
@@ -109,16 +115,25 @@
       it
     }
   }
-  show footnote: set text(blue)
-  show footnote.entry: it => {
-    show regex("^\d+\b"): set text(blue)
-    it
-  }
+  // show footnote: set text(blue)
+  set footnote.entry(separator: line(stroke: 0.3pt + blue, length: 30%))
+  // show footnote.entry: it => {
+  //   show regex("^\d+\b"): set text(blue)
+  //   it
+  // }
+
+  set enum(numbering: n => text(blue)[#numbering("1.", n)])
+  set list(marker: lvl => text(blue)[#(
+    sym.bullet,
+    sym.bullet.stroked,
+    sym.bullet.tri,
+    sym.bullet.op,
+  ).at(lvl, default: sym.hyph)])
 
   show heading: set text(blue, hyphenate: false, number-type: "lining")
   show heading: set block(above: 2.2em, below: 1.1em)
-  show heading.where(level: 1): set block(above: 3em, below: 1.5em)
-  show heading.where(level: 1): upper
+  show heading.where(level: 1): set block(above: 3em, below: 1.9em)
+  show heading.where(level: 1): smallcaps
 
   show heading.where(level: 1): align.with(center)
   show heading: align.with(left)
@@ -129,7 +144,7 @@
 
   show figure.caption: it => [
     #show strong: it => text(blue, weight: "medium")[#it.body]
-    #set terms(separator: sym.colon + h(0.3em), tight: true)
+    #set terms(separator: text(blue)[#sym.colon#h(0.3em)], tight: true)
 
     / #it.supplement #it.counter.display(): #it.body
   ]
@@ -139,11 +154,16 @@
     below: 2em,
   )
 
-  show table: set text(number-type: "lining", number-width: "tabular")
-  set table(fill: (_, y) => if y == 0 { gray })
-  show table: set align(center)
+  // set terms(separator: h(1fr))
+  show terms.item: block.with(above: 1em, below: 1em)
+  show terms: it => {
+    set repeat(gap: 1.5pt)
+    // show repeat: set text(blue, font: ("Cambria Math", "Times New Roman")) // cambria uses squared dots
+    show link: set text(blue)
+    it
+  }
 
-  show table.cell.where(y: 0): set text(weight: "semibold", features: ("smcp",))
+  show table: set text(number-type: "lining", number-width: "tabular")
 
   show heading.where(numbering: "1.1"): set heading(
     numbering: (..nums) => {
@@ -163,15 +183,13 @@
 }
 
 #let main(body) = {
-  show: base
-
   import "@preview/hydra:0.6.3": hydra
 
   set page(header: context {
     let odd = calc.odd(here().page())
 
     set align(if odd { right } else { left })
-    set text(0.9em, style: "italic", blue.transparentize(32%))
+    set text(0.9em, style: "italic", weight: "thin", blue)
 
     hydra(if odd { 1 } else { 2 })
   })
@@ -180,3 +198,55 @@
 
   body
 }
+
+#let abbr = (
+  section: (title, body) => {
+    heading(level: 1, title)
+    body
+  },
+
+  group: (name, index, total, body) => body,
+
+  entry: (entry, index, total) => [
+    // / #entry.short: #entry.long#entry.label #box(width: 1fr)[#repeat(".")] #box[#entry.pages.join(", ")]
+    / #entry.short: #entry.long#entry.label #h(1fr) #box[#entry.pages.join(", ")]
+  ],
+)
+
+#let terms = (
+  section: (title, body) => {
+    heading(level: 1, title)
+    body
+  },
+
+  group: (name, index, total, body) => body,
+
+  entry: (entry, index, total) => {
+    // Format the reference
+    let reference = if entry.reference == none {
+      []
+    } else {
+      if entry.reference.supplement == none {
+        [ #cite(label(entry.reference.key))]
+      } else {
+        [
+          #cite(
+            label(entry.reference.key),
+            supplement: entry.reference.supplement,
+          )]
+      }
+    }
+
+    let term = if entry.long != none { entry.long } else { entry.short }
+
+    terms.item(
+      term,
+      [
+        #entry.description#reference // #entry.label // show cross refs only for abbr, to avoid multiple label same key
+        // #box(width: 1fr)[#repeat(".")]
+        #h(1fr)
+        #box[#entry.pages.join(", ")] // maybe mark as pdf.artifact
+      ],
+    )
+  },
+)
