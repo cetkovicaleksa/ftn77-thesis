@@ -17,6 +17,8 @@
 .devcontainer.json linguist-language=JSON-with-Comments
 devcontainer.json linguist-language=JSON-with-Comments
 
+*.pdf          export-ignore
+
 .gitattributes export-ignore
 .gitignore     export-ignore
 .gitkeep       export-ignore
