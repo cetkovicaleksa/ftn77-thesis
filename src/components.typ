@@ -23,6 +23,7 @@
 
 #let form-heading(
   style: style,
+  lang: auto,
   body,
 ) = context {
   import style: gray
@@ -50,14 +51,16 @@
           dir: ttb,
           spacing: 0.6em,
 
-          ..if ("sr", "ba").contains(text.lang) {
+          ..if ("sr", "ba").contains(if lang == auto { text.lang } else { lang }) {
             (
-              upper[#text(weight: "light")[Универзитет у Новом Саду] #sym.circle.filled *Факултет техничких наука*],
+              upper[#text(weight: "light")[Универзитет у Новом Саду] #sym.circle.filled *Факултет
+                техничких наука*],
               text(weight: "light", tracking: 0.1em)[2100 НОВИ САД, Трг Доситеја Обрадовића 6],
             )
           } else {
             (
-              upper[#text(weight: "light")[University of Novi Sad] #sym.circle.filled *Faculty of technical sciences*],
+              upper[#text(weight: "light")[University of Novi Sad] #sym.circle.filled *Faculty of
+                technical sciences*],
               text(weight: "light", tracking: 0.1em)[21000 NOVI SAD, Trg Dositeja Obradovića 6],
             )
           },
@@ -78,6 +81,7 @@
   number: sym.space,
   date: sym.space,
   style: style,
+  lang: auto,
   body,
 ) = {
   import style: gray
@@ -116,14 +120,16 @@
               dir: ttb,
               spacing: 0.6em,
 
-              ..if ("sr", "ba").contains(text.lang) {
+              ..if ("sr", "ba").contains(if lang == auto { text.lang } else { lang }) {
                 (
-                  upper[#text(weight: "light")[Универзитет у Новом Саду] #sym.circle.filled *Факултет техничких наука*],
+                  upper[#text(weight: "light")[Универзитет у Новом Саду] #sym.circle.filled
+                    *Факултет техничких наука*],
                   text(weight: "light", tracking: 0.1em)[2100 НОВИ САД, Трг Доситеја Обрадовића 6],
                 )
               } else {
                 (
-                  upper[#text(weight: "light")[University of Novi Sad] #sym.circle.filled *Faculty of technical sciences*],
+                  upper[#text(weight: "light")[University of Novi Sad] #sym.circle.filled *Faculty
+                    of technical sciences*],
                   text(weight: "light", tracking: 0.1em)[21000 NOVI SAD, Trg Dositeja Obradovića 6],
                 )
               },

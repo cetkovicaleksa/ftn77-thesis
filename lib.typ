@@ -11,7 +11,8 @@
 #import "src/cover.typ": cover, cover-new
 #import "src/outline.typ": outline
 #import "src/form/assignment.typ": assignment
-#import "src/form/kwd.typ": kwd, kwd-en
+#let _assignment = assignment
+#import "src/form/kwd.typ": kwd
 #import "src/form/conflict.typ": conflict
 
 
@@ -54,7 +55,7 @@
   degree: [Основне академске студије],
   field: [],
   discipline: [],
-  assignment-text: lorem(50),
+  assignment: [],
   date: auto,
   bio: none,
   glossary: (:),
@@ -145,9 +146,9 @@
   )
 
   _pagebreak()
-  assignment(
+  _assignment(
+    assignment,
     title: title,
-    text_: assignment-text,
     program: program,
     degree: degree,
     field: field,
@@ -200,21 +201,22 @@
 
   _pagebreak()
   kwd(
+    ..args,
+    lang: "sr",
     title: title,
     author: author,
     mentor: mentor,
     field: field,
     discipline: discipline,
     abstract: abstract,
-    program: program,
     style: style,
-    ..args,
   )
 
   _pagebreak()
-  kwd-en(
-    style: style,
+  kwd(
     ..en,
+    lang: "en",
+    style: style,
   )
 
   _pagebreak()

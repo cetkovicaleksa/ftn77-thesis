@@ -6,16 +6,17 @@
 #let _medium = black + 1.5pt
 
 #let assignment(
+  body,
   title: auto,
-  text_: [],
   degree: sym.space,
   field: sym.space,
   program: sym.space,
-  author: (:),
-  mentor: (:),
+  author: (name: "", id: ""),
+  mentor: (name: ""),
   date: sym.space,
   number: sym.space,
   style: style,
+  ..sink,
 ) = [
   #import style: gray
   #show: style.form
@@ -44,7 +45,9 @@
           // align: (left, left, center),
           stroke: (top: none, bottom: none, left: none),
 
-          author.name, [Број индекса:], text(tracking: 0.067em, size: 0.8em, fractions: false)[#upper(author.id)],
+          author.name,
+          [Број индекса:],
+          text(tracking: 0.067em, size: 0.8em, fractions: false)[#upper(author.id)],
         )
       ],
 
@@ -58,9 +61,10 @@
         fill: gray,
       )[#text(size: 0.9em)[
         НА ОСНОВУ ПОДНЕТЕ ПРИЈАВЕ, ПРИЛОЖЕНЕ ДОКУМЕНТАЦИЈЕ И ОДРЕДБИ СТАТУТА ФАКУЛТЕТА \
-        ИЗДАЈЕ СЕ ЗАДАТАК ЗА  ЗАВРШНИ РАД, СА СЛЕДЕЋИМ ЕЛЕМЕНТИМА:
+        ИЗДАЈЕ СЕ ЗАДАТАК ЗА ЗАВРШНИ РАД, СА СЛЕДЕЋИМ ЕЛЕМЕНТИМА:
         - проблем -- тема рада;
-        - начин решавања проблема и начин практичне провере резултата рада, ако је таква провера неопходна;
+        - начин решавања проблема и начин практичне провере резултата рада, ако је таква провера
+          неопходна;
       ]],
     )
   ]
@@ -84,7 +88,7 @@
   #v(-0.8em)
 
   #rect(width: 100%, stroke: _medium, height: 4fr, inset: 0.67em)[
-    #par(justify: true)[#text_]
+    #par(justify: true)[#body]
   ]
 
   #align(bottom)[
@@ -121,3 +125,5 @@
   ]
 
 ]
+
+#assignment()[]
