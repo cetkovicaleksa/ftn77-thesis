@@ -99,6 +99,7 @@
   math-font: "Cambria Math",
   raw-size: 10pt,
   raw-font: "Courier New",
+  accent: blue,
 ) = {
   set text(
     body-size,
@@ -109,7 +110,7 @@
   show math.equation: set text(math-size, font: math-font)
 
   show outline.entry: it => {
-    show repeat: set text(blue)
+    show repeat: set text(accent)
     // show repeat: set text(font: ("Cambria Math", "Times New Roman")) // cambria uses squared dots
 
     if it.element.func() == heading {
@@ -119,7 +120,7 @@
       link(
         it.element.location(),
         it.indented(
-          text(blue, weight: "medium")[#it.prefix()],
+          text(accent, weight: "medium")[#it.prefix()],
           it.inner(),
         ),
       )
@@ -127,28 +128,28 @@
   }
   show link: it => {
     if type(it.dest) == str {
-      set text(blue)
+      set text(accent)
       it
     } else {
       it
     }
   }
   // show footnote: set text(blue)
-  set footnote.entry(separator: line(stroke: 0.3pt + blue, length: 30%))
+  set footnote.entry(separator: line(stroke: 0.3pt + accent, length: 30%))
   // show footnote.entry: it => {
   //   show regex("^\d+\b"): set text(blue)
   //   it
   // }
 
-  set enum(numbering: n => text(blue)[#numbering("1.", n)])
-  set list(marker: lvl => text(blue)[#(
+  set enum(numbering: n => text(accent)[#numbering("1.", n)])
+  set list(marker: lvl => text(accent)[#(
     sym.bullet,
     sym.bullet.stroked,
     sym.bullet.tri,
     sym.bullet.op,
   ).at(lvl, default: sym.hyph)])
 
-  show heading: set text(blue, hyphenate: false, number-type: "lining")
+  show heading: set text(accent, hyphenate: false, number-type: "lining")
   show heading: set block(above: 2.2em, below: 1.1em)
   show heading.where(level: 1): set block(above: 3em, below: 1.9em)
   show heading.where(level: 1): smallcaps
@@ -162,10 +163,10 @@
   show terms.item: block.with(above: 1em, below: 1em)
   show terms: it => {
     // set repeat(gap: 1.5pt)
-    show repeat: set text(blue)
+    show repeat: set text(accent)
     show repeat: box.with(width: 1fr)
     // show repeat: set text(blue, font: ("Cambria Math", "Times New Roman")) // cambria uses squared dots
-    show link: set text(blue)
+    show link: set text(accent)
     it
   }
 
@@ -203,7 +204,7 @@
   body
 }
 
-#let main(body, hydra: true) = {
+#let main(body, hydra: true, accent: blue) = {
   show: if hydra { _hydra } else { body => body }
 
   set par(justify: true, first-line-indent: 1em)
@@ -213,7 +214,7 @@
 
   show figure.caption: it => [
     #text(
-      blue,
+      accent,
       weight: "medium",
       number-type: "lining",
     )[#it.supplement#sym.space.nobreak#it.counter.display()#it.separator] #it.body
