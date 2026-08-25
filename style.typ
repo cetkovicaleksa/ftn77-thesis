@@ -11,12 +11,22 @@
 
 #let form-factor() = if page.width != auto { page.width / 21cm } else { 1 }
 
-#let cover(body) = context {
+#let cover(
+  body,
+  body-size: 12pt,
+  title-size: 17pt,
+  title-outlined: false,
+  title-bookmarked: true,
+  body-font: ("Times New Roman", "Liberation Serif", "Libertinus Serif"),
+  sans-font: ("Arial", "Liberation Sans", "Libertinus Serif"),
+  logo-scale: 80%,
+  margin: 1.5cm,
+) = context {
   set page(footer: none, header: none)
-  set page(margin: 1.5cm)
+  set page(margin: margin)
   set text(
-    12pt,
-    font: ("Times New Roman", "Liberation Serif", "Libertinus Serif"),
+    body-size,
+    font: body-font,
     hyphenate: false,
   )
 
@@ -24,11 +34,11 @@
 
   show title: block.with(width: 90%)
   show title: align.with(center)
-  show title: set text(17pt, font: ("arial", "liberation sans", "libertinus sans"))
+  show title: set text(title-size, font: sans-font)
   show title: set par(justify: false)
 
   // show logos a bit smaller than usual
-  show image: scale.with(80% * form-factor(), reflow: true)
+  show image: scale.with(logo-scale * form-factor(), reflow: true)
 
   set grid(inset: (bottom: 0.67em, left: 0.16em, right: 0.16em))
   set grid.hline(stroke: black + 0.5pt)
@@ -38,7 +48,12 @@
   set heading(outlined: false, bookmarked: true, numbering: none)
   show heading: hide
   show heading: place.with(center + top)
-  heading[Насловна страна]
+  heading(
+    level: 1,
+    outlined: title-outlined,
+    bookmarked: title-bookmarked,
+    supplement: [Формулар],
+  )[Насловна страна]
 
   body
 }
@@ -76,23 +91,26 @@
   body
 }
 
-#let base(body) = {
+#let base(
+  body,
+  body-size: 11pt,
+  body-font: ("Times New Roman", "Segoe UI Symbol"),
+  math-size: 11pt,
+  math-font: "Cambria Math",
+  raw-size: 10pt,
+  raw-font: "Courier New",
+) = {
   set text(
-    11pt,
-    font: (
-      "Times New Roman",
-      "Liberation Serif",
-      "Libertinus Serif",
-      "Segoe UI Symbol",
-      "Noto Sans Symbols2",
-    ),
+    body-size,
+    font: body-font,
   )
-  show raw: set text(10pt, font: "Courier New")
+  show raw: set text(raw-size, font: raw-font)
   set raw(theme: "assets/theme/GitHub Light.tmTheme")
-  show math.equation: set text(font: "Cambria Math")
+  show math.equation: set text(math-size, font: math-font)
 
   show outline.entry: it => {
-    show repeat: set text(blue, font: ("Cambria Math", "Times New Roman")) // cambria uses squared dots
+    show repeat: set text(blue)
+    // show repeat: set text(font: ("Cambria Math", "Times New Roman")) // cambria uses squared dots
 
     if it.element.func() == heading {
       it
@@ -138,26 +156,14 @@
   show heading.where(level: 1): align.with(center)
   show heading: align.with(left)
 
-  set par(leading: 0.65em, justify: true)
-
-  show figure.where(kind: table): set figure.caption(position: top)
-
-  show figure.caption: it => [
-    #show strong: it => text(blue, weight: "medium")[#it.body]
-    #set terms(separator: text(blue)[#sym.colon#h(0.3em)], tight: true)
-
-    / #it.supplement #it.counter.display(): #it.body
-  ]
-
-  show figure: set block(
-    above: 2em,
-    below: 2em,
-  )
+  set par(justify: true)
 
   // set terms(separator: h(1fr))
   show terms.item: block.with(above: 1em, below: 1em)
   show terms: it => {
-    set repeat(gap: 1.5pt)
+    // set repeat(gap: 1.5pt)
+    show repeat: set text(blue)
+    show repeat: box.with(width: 1fr)
     // show repeat: set text(blue, font: ("Cambria Math", "Times New Roman")) // cambria uses squared dots
     show link: set text(blue)
     it
@@ -182,7 +188,7 @@
   body
 }
 
-#let main(body) = {
+#let _hydra(body) = {
   import "@preview/hydra:0.6.3": hydra
 
   set page(header: context {
@@ -194,10 +200,42 @@
     hydra(if odd { 1 } else { 2 })
   })
 
+  body
+}
+
+#let main(body, hydra: true) = {
+  show: if hydra { _hydra } else { body => body }
+
+  set par(justify: true, first-line-indent: 1em)
+
+  set figure.caption(separator: sym.colon, position: bottom)
+  show figure.where(kind: table): set figure.caption(position: top)
+
+  show figure.caption: it => [
+    #text(
+      blue,
+      weight: "medium",
+      number-type: "lining",
+    )[#it.supplement#sym.space.nobreak#it.counter.display()#it.separator] #it.body
+  ]
+
+  show figure
+    .where(kind: table)
+    .or(figure.where(kind: raw))
+    .or(figure.where(kind: "алгоритам")): set block(breakable: true)
+  show figure.caption: set block(sticky: true)
+
+  show figure: set block(
+    above: 2em,
+    below: 2em,
+  )
+
   // show heading.where(level: 1): set block(inset: (y: 0.77em), stroke: (top: blue, bottom: blue), width: 100%)
 
   body
 }
+
+#let appendices = main.with(hydra: false)
 
 #let abbr = (
   section: (title, body) => {

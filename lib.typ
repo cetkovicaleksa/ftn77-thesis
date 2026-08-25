@@ -24,7 +24,9 @@
   none
 }
 
-#let show-appendices() = context {
+#let show-appendices(style: style) = context {
+  show: style.appendices
+
   counter(heading).update(0)
   set heading(
     numbering: sr-numbering,
