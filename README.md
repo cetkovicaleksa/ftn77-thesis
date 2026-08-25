@@ -5,6 +5,9 @@ A Typst template for writing Bachelor's/Master's theses at the Faculty of techni
 **⚠️ Disclaimer**
 : This is not an offical template, but rather what i developed for my personal thesis which follows uni guidelines.
 
+Repository
+: <https//github.com/cetkovicaleksa/ftn77-thesis>
+
 ## Overview
 
 File [thesis.pdf](./thesis.pdf) provides an example of the compiled pdf, compiled directly from the [starter files](./template/).
@@ -58,7 +61,7 @@ Some features of the template:
 
 [Typst@0.15.0](https://github.com/typst/typst/tree/v0.15.0) was used for development, so ensure your typst is up to date.
 
-The template is not yet available as a typst preview package (may be in the future), so to use it you need to install it as a local package. This can be done by downloading a release from the [releases page](https://github.com/cetkovicaleksa/ftn77-thesis/releases) (or just downloading this repo as a zip, in which case ensure you are at a desired commit/branch/tag) and extracting it to typst local packages under `ftn77-thesis/<release version>` (currently `ftn-thesis/0.1.0`). You can find out where typst packages are stored by running `typst info` and checking package path in the section "Packages", local packages are under a subdirectory `local/` (ex. on linux `~/.local/share/typst/packages/local/`).
+The template is not yet available as a typst preview package (may be in the future), so to use it you need to install it as a local package. This can be done by downloading a release from the [releases page](https://github.com/cetkovicaleksa/ftn77-thesis/releases) (or just downloading this repo as a zip, in which case ensure you are at a desired commit/branch/tag) and extracting its contents to typst local packages under `ftn77-thesis/<release version>` (currently `ftn-thesis/0.1.0`). You can find out where typst packages are stored by running `typst info` and checking package path in the section "Packages", local packages are under a subdirectory `local/` (ex. full path when extracted on linux `~/.local/share/typst/packages/local/ftn77-thesis/0.1.0/<repo root with README.md>`).
 
 Below is a minimal example of how to use the template once it is installed:
 
