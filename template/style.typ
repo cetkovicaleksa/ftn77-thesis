@@ -11,22 +11,21 @@
 // to the `thesis` function.
 #import default: *
 
-#let cover(body) = context {
-  show: default.cover
+#let cover(body) = default.cover.with(margin: 1.5cm)
 
-  set heading(outlined: true)
+#let base(body) = default.base.with(
+  accent: blue, // uses blue from ftn site defined by default.blue
+  body-size: 11pt,
+)
+
+#let main(body) = {
+  show: default.main
+
+  // additional styling starting from default main style, if changed also change the appendices style to reflect it
 
   body
 }
 
-#let base(body) = {
-  show: default.base
+// #let appendices = main
 
-  set text(11pt)
-
-  body
-}
-
-#let main = default.main
-#let cover = default.cover
 // ... see default style module
