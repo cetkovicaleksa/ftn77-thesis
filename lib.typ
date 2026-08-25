@@ -194,7 +194,7 @@
 
     bibliography
 
-    show-appendices()
+    show-appendices(style: style)
 
     if type(bio) == str [
       = Биографија

@@ -189,14 +189,14 @@
   body
 }
 
-#let _hydra(body) = {
+#let _hydra(body, accent: blue) = {
   import "@preview/hydra:0.6.3": hydra
 
   set page(header: context {
     let odd = calc.odd(here().page())
 
     set align(if odd { right } else { left })
-    set text(0.9em, style: "italic", weight: "thin", blue)
+    set text(0.9em, style: "italic", weight: "thin", accent)
 
     hydra(if odd { 1 } else { 2 })
   })
@@ -205,7 +205,7 @@
 }
 
 #let main(body, hydra: true, accent: blue) = {
-  show: if hydra { _hydra } else { body => body }
+  show: if hydra { _hydra.with(accent: accent) } else { body => body }
 
   set par(justify: true, first-line-indent: 1em)
 
@@ -214,7 +214,7 @@
 
   show figure.caption: it => [
     #text(
-      accent,
+      fill: accent,
       weight: "medium",
       number-type: "lining",
     )[#it.supplement#sym.space.nobreak#it.counter.display()#it.separator] #it.body
@@ -236,7 +236,10 @@
   body
 }
 
-#let appendices = main.with(hydra: false)
+#let appendices(body, accent: blue) = {
+  show: main.with(accent: accent)
+  body
+}
 
 #let abbr = (
   section: (title, body) => {
