@@ -3,7 +3,7 @@
 A Typst template for writing Bachelor's/Master's theses at the Faculty of technical sciences, University of Novi Sad.
 
 **⚠️ Disclaimer**
-: This is not an offical template, but rather what i developed for my personal thesis which follows uni guidelines.
+: This is not an offical template, but rather what I developed for my personal thesis which follows uni guidelines.
 
 Repository
 : <https//github.com/cetkovicaleksa/ftn77-thesis>
