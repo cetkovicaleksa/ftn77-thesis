@@ -3,10 +3,7 @@
 A Typst template for writing Bachelor's/Master's theses at the Faculty of technical sciences, University of Novi Sad.
 
 **⚠️ Disclaimer**
-: This is not an offical template, but rather what I developed for my personal thesis which follows uni guidelines.
-
-Repository
-: <https//github.com/cetkovicaleksa/ftn77-thesis>
+: This is not an official template, but rather what I developed for my personal thesis which follows uni guidelines.
 
 ## Overview
 
@@ -45,7 +42,8 @@ Some features of the template:
 - custom serbian cryl translations for the bibliography using the ieee style guide (used by default with the `bibliography` exported by the template)
 - outlines for common figure types
     - "slika", "listing", "tabela" - auto recognized from `image`, `raw` and `table` figure kinds
-    - "график", "алгоритам" - custom kinds (must be set with `figure::kind`)
+    - "график" - custom kind, must be set when placing a figure
+    - other figure kinds can be outlined by passing `outlines` to `thesis`
 - idiomatic page/figure numbering
     - Front-matter pages numbered with roman numerals, main starts at 1
     - Chapters numbered 1.1 while appendices А.1 (following serbian azbuka enumeration)
@@ -61,27 +59,25 @@ Some features of the template:
 
 [Typst@0.15.0](https://github.com/typst/typst/tree/v0.15.0) was used for development, so ensure your typst is up to date.
 
-The template is not yet available as a typst preview package (may be in the future), so to use it you need to install it as a local package. This can be done by downloading a release from the [releases page](https://github.com/cetkovicaleksa/ftn77-thesis/releases) (or just downloading this repo as a zip, in which case ensure you are at a desired commit/branch/tag) and extracting its contents to typst local packages under `ftn77-thesis/<release version>` (currently `ftn-thesis/0.1.0`). You can find out where typst packages are stored by running `typst info` and checking package path in the section "Packages", local packages are under a subdirectory `local/` (ex. full path when extracted on linux `~/.local/share/typst/packages/local/ftn77-thesis/0.1.0/<repo root with README.md>`).
-
-Below is a minimal example of how to use the template once it is installed:
+Below is a minimal example of how to use the template:
 
 ```typ
-#import "@local/ftn77-thesis:0.1.0": appendices, thesis
+#import "@preview/ftn77-thesis:0.1.0": appendices, thesis
 
-#show thesis
+#show: thesis.with() // specify args with metadata
 
 // write your main content here
 
-#show appendices
+#show: appendices
 
 // write your appendices here
 ```
 
 Reccommended way to get started is to use the provided [starter files](./template/) to initialize the project, which can be done with:
 
-```sh
-$ typst init @local/ftn77-thesis:0.1.0
-Successfully created new project from @local/ftn77-thesis:0.1.0 🎉
+```bash
+$ typst init @preview/ftn77-thesis:0.1.0
+Successfully created new project from @preview/ftn77-thesis:0.1.0 🎉
 To start writing, run:
 > cd ftn77-thesis
 > typst watch thesis.typ
@@ -89,7 +85,7 @@ To start writing, run:
 
 ## License
 
-This template is licensed under the **CC BY-NC-SA 4.0** license, see [LICENSE](./LICENSE).
+This template is licensed under the **GPL 3.0 or later** license, see [LICENSE](./LICENSE).
 
 ## Third-party materials
 
@@ -98,7 +94,6 @@ This template is licensed under the **CC BY-NC-SA 4.0** license, see [LICENSE](.
 - **GitHub Light theme** — licensed under the [CC BY-SA 3.0](
   http://creativecommons.org/licenses/by-sa/3.0/
   ) license.
-- **IEEE Reference Guide (ieee.xml)** — licensed under the [CC BY-SA 3.0](
+- **IEEE Reference Guide (ieee.xml)** — modified, licensed under the [CC BY-SA 3.0](
   http://creativecommons.org/licenses/by-sa/3.0/
   ) license.
-
