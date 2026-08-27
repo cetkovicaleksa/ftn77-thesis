@@ -91,6 +91,18 @@
   body
 }
 
+#let pre(body) = {
+  set page(
+    number-align: center,
+    supplement: [стр.],
+    // can set margin in style, overrides thesis::margin
+  )
+
+  // show smallcaps: set text(script: "Latn")
+
+  body
+}
+
 #let base(
   body,
   body-size: 11pt,
@@ -109,6 +121,11 @@
   set raw(theme: "assets/theme/GitHub Light.tmTheme")
   show math.equation: set text(math-size, font: math-font)
 
+  show figure.where(kind: raw): set figure(supplement: [Листинг])
+  show figure.where(kind: _common.graph): set figure(supplement: [График])
+
+  show outline: it => if query(it.target).filter(it => it.outlined).len() > 0 { it } // hide outline if no entries
+  show outline: set heading(outlined: true)
   show outline.entry: it => {
     show repeat: set text(accent)
     // show repeat: set text(font: ("Cambria Math", "Times New Roman")) // cambria uses squared dots
@@ -159,32 +176,35 @@
 
   set par(justify: true)
 
-  // set terms(separator: h(1fr))
-  show terms.item: block.with(above: 1em, below: 1em)
   show terms: it => {
-    // set repeat(gap: 1.5pt)
     show repeat: set text(accent)
     show repeat: box.with(width: 1fr)
-    // show repeat: set text(blue, font: ("Cambria Math", "Times New Roman")) // cambria uses squared dots
     show link: set text(accent)
+
     it
   }
 
+  set figure(
+    numbering: n => numbering("1.1", counter(heading).get().first(), n),
+  )
+
+  set figure.caption(separator: sym.colon, position: bottom)
+  show figure.where(kind: table): set figure.caption(position: top)
+
+  show figure.caption: it => [
+    #text(
+      fill: accent,
+      weight: "medium",
+      number-type: "lining",
+    )[#it.supplement#sym.space.nobreak#it.counter.display()#it.separator] #it.body
+  ]
+
+  show figure.where(kind: table).or(figure.where(kind: raw)): set block(breakable: true)
+  show figure.caption: set block(sticky: true)
+
   show table: set text(number-type: "lining", number-width: "tabular")
 
-  show heading.where(numbering: "1.1"): set heading(
-    numbering: (..nums) => {
-      numbering("1.1", ..nums)
-      h(0.3em)
-    },
-  )
-
-  show heading.where(numbering: _common.sr-numbering): set heading(
-    numbering: (..nums) => {
-      _common.sr-numbering(..nums)
-      h(0.3em)
-    },
-  )
+  show cite.where(form: "normal"): set text(number-type: "lining", number-width: "tabular")
 
   body
 }
@@ -205,39 +225,28 @@
 }
 
 #let main(body, hydra: true, accent: blue) = {
-  show: if hydra { _hydra.with(accent: accent) } else { body => body }
+  set heading(numbering: "1.1")
+  set heading(supplement: [Потпоглавље])
+  show heading.where(level: 1): set heading(supplement: [Поглавље])
 
   set par(justify: true, first-line-indent: 1em)
 
-  set figure.caption(separator: sym.colon, position: bottom)
-  show figure.where(kind: table): set figure.caption(position: top)
-
-  show figure.caption: it => [
-    #text(
-      fill: accent,
-      weight: "medium",
-      number-type: "lining",
-    )[#it.supplement#sym.space.nobreak#it.counter.display()#it.separator] #it.body
-  ]
-
-  show figure
-    .where(kind: table)
-    .or(figure.where(kind: raw))
-    .or(figure.where(kind: "алгоритам")): set block(breakable: true)
-  show figure.caption: set block(sticky: true)
-
-  show figure: set block(
-    above: 2em,
-    below: 2em,
-  )
-
-  // show heading.where(level: 1): set block(inset: (y: 0.77em), stroke: (top: blue, bottom: blue), width: 100%)
+  show: if hydra { _hydra.with(accent: accent) } else { body => body }
 
   body
 }
 
 #let appendices(body, accent: blue) = {
-  show: main.with(accent: accent)
+  set heading(
+    numbering: _common.sr-numbering,
+    supplement: [Додатак],
+  )
+  set figure(
+    numbering: n => _common.sr-numbering(counter(heading).get().first(), n),
+  )
+
+  set par(justify: true, first-line-indent: 1em)
+
   body
 }
 
@@ -250,8 +259,8 @@
   group: (name, index, total, body) => body,
 
   entry: (entry, index, total) => [
-    // / #entry.short: #entry.long#entry.label #box(width: 1fr)[#repeat(".")] #box[#entry.pages.join(", ")]
-    / #entry.short: #entry.long#entry.label #h(1fr) #box[#entry.pages.join(", ")]
+    / #entry.short: #entry.long#entry.label #h(1fr) #entry.pages.join(", ")
+    // / #entry.short: #entry.long#entry.label #repeat(".") #entry.pages.join(", ")
   ],
 )
 
@@ -281,14 +290,9 @@
 
     let term = if entry.long != none { entry.long } else { entry.short }
 
-    terms.item(
-      term,
-      [
-        #entry.description#reference // #entry.label // show cross refs only for abbr, to avoid multiple label same key
-        // #box(width: 1fr)[#repeat(".")]
-        #h(1fr)
-        #box[#entry.pages.join(", ")] // maybe mark as pdf.artifact
-      ],
-    )
+    [
+      / #term: #entry.description#reference #h(1fr) #entry.pages.join(", ")
+      // / #term: #entry.description#reference #repeat(".") #entry.pages.join(", ")
+    ]
   },
 )

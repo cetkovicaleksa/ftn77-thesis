@@ -24,6 +24,7 @@
 
   #assignment-form-heading(style: style)[Задатак за завршни рад]
 
+  #show heading: upper
   #set list(marker: "-", indent: 1.5em, body-indent: 1.5em)
   #set table(stroke: _hairline)
 
@@ -69,23 +70,13 @@
     )
   ]
 
-  #upper[
-    #text(size: 1.25em)[
-      #strong[Наслов завршног рада:]
-    ]
-  ]
-  #v(-0.8em)
+  #heading(level: 2, outlined: false, bookmarked: false)[Наслов завршног рада:]
 
   #rect(width: 100%, stroke: _medium, height: 0.7fr, inset: 0.67em, outset: 0pt)[
     #align(center + horizon, strong(if title == auto { context document.title } else { title }))
   ]
 
-  #upper[
-    #text(size: 1.25em)[
-      #strong[Текст задатка:]
-    ]
-  ]
-  #v(-0.8em)
+  #heading(level: 2, outlined: false, bookmarked: false)[Текст задатка:]
 
   #rect(width: 100%, stroke: _medium, height: 4fr, inset: 0.67em)[
     #par(justify: true)[#body]

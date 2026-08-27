@@ -1,12 +1,26 @@
 #import "../components.typ": form-heading
-#import "../state.typ" as state
+#import "../common.typ": graph
 #import "../../style.typ" as style
 
 
 #let _dashed = (dash: "densely-dashed", thickness: 0.11em, paint: black)
 #let _solid = 0.15em + black
 
-// replace all sym.space arguments with []
+#let count = (
+  appendices: context query(metadata.where(value: "h:appendix")).len(),
+  images: context query(figure.where(kind: image)).len(),
+  tables: context query(figure.where(kind: table)).len(),
+  graphs: context query(figure.where(kind: graph)).len(),
+  citations: context query(cite).dedup().len(),
+  chapters: context query(metadata.where(value: "h:chapter")).len(),
+  pages: context (
+    counter(page).final().first(),
+    ..query(metadata.where(value: "page-count-reset"))
+      .map(it => it.location())
+      .map(loc => counter(page).at(loc).first() - 1),
+  ).sum(),
+  listings: context query(figure.where(kind: raw)).len(),
+)
 
 #let _kwd(
   accession-number: [],
@@ -96,7 +110,7 @@
         ],
         if physical == auto {
           context [
-            #state.chapters/#state.pages/#state.citations/#state.tables/#state.images/#state.graphs/#state.appendices
+            #count.chapters/#count.pages/#count.citations/#count.tables/#count.images/#count.graphs/#count.appendices
           ]
         } else { physical },
 
@@ -241,7 +255,7 @@
         ],
         if physical == auto {
           context [
-            #state.chapters/#state.pages/#state.citations/#state.tables/#state.images/#state.graphs/#state.appendices
+            #count.chapters/#count.pages/#count.citations/#count.tables/#count.images/#count.graphs/#count.appendices
           ]
         } else { physical },
 
@@ -316,7 +330,7 @@
     place: [],
     year: [],
   ),
-  physical: [],
+  physical: auto,
   field: [],
   discipline: [],
   subject-keywords: [],

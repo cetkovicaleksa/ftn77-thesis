@@ -14,19 +14,19 @@
 #let cover = default.cover.with(margin: 1.5cm)
 
 #let base = default.base.with(
-  accent: red, // uses blue from ftn site defined by default.blue
+  accent: blue, // uses blue from ftn site defined by default.blue, which is the default accent
   body-size: 11pt,
 )
 
 #let main(body) = {
-  show: default.main.with(accent: red)
+  show: default.main.with(accent: blue)
 
   // additional styling starting from default main style, if changed also change the appendices style to reflect it
 
   body
 }
 
-#let appendices = default.appendices.with(accent: red)
+#let appendices = default.appendices.with(accent: blue)
 
 // #let appendices = main
 

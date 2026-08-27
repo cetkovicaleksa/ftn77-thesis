@@ -1,5 +1,4 @@
-#import "src/state.typ" as state
-#import "src/common.typ": sr-numbering
+#import "src/common.typ": azbuka, graph, sr-numbering
 #import "src/components.typ": (
   assignment-form-heading, form-heading, ftn-logo, ftn-logo-new, uns-logo,
 )
@@ -9,7 +8,6 @@
 #let _gls = glossary
 
 #import "src/cover.typ": cover, cover-new
-#import "src/outline.typ": outline
 #import "src/form/assignment.typ": assignment
 #let _assignment = assignment
 #import "src/form/kwd.typ": kwd
@@ -18,29 +16,21 @@
 
 #let bibliography = std.bibliography.with(style: "assets/csl/ieee.xml")
 
+#let _appendices = state("appendices", none)
 
 #let appendices(body) = context {
-  state._appendices.update(state._appendices.get() + body)
+  _appendices.update(_appendices.get() + body)
   none
 }
 
-#let show-appendices(style: style) = context {
-  show: style.appendices
 
-  counter(heading).update(0)
-  set heading(
-    numbering: sr-numbering,
-    supplement: [Додатак],
-  )
-
-  set figure(
-    numbering: n => sr-numbering(counter(heading).get().first(), n),
-  )
-
-  [
-    #state._appendices.final()
-  ]
-}
+#let outlines = (
+  std.outline(depth: 3),
+  std.outline(title: "Списак слика", target: figure.where(kind: image)),
+  std.outline(title: "Списак табела", target: figure.where(kind: table)),
+  std.outline(title: "Списак листинга", target: figure.where(kind: raw)),
+  std.outline(title: "Списак графика", target: figure.where(kind: graph)),
+)
 
 
 #let thesis(
@@ -64,9 +54,80 @@
   glossary: (:),
   glossary-links: false,
   glossary-all: false,
+  outlines: outlines,
+  chapter-relative-fig-nums: true,
+  appendices: none,
+  accession-number: [],
+  identification-number: [],
+  document-type: [],
+  type-of-record: [],
+  contents-code: [],
+  text-lang: [],
+  abstract-lang: [],
+  publication: (
+    publisher: [],
+    country: [],
+    locality: [],
+    place: [],
+    year: [],
+  ),
+  physical: auto,
+  subject-keywords: [],
+  uc: [],
+  holding-data: [],
+  note: [],
+  accepted-date: [],
+  defense: (
+    date: [],
+    president: [],
+    member1: [],
+    member2: [],
+    mentor: [],
+  ),
 
   en: (
+    title: [],
+    author: (
+      name: "Imenko Prezimić",
+      id: "",
+    ),
+    mentor: (
+      name: "Ranko Prezimić",
+    ),
     keywords: (),
+    abstract: none,
+    program: [],
+    degree: [Основне академске студије],
+    field: [],
+    discipline: [],
+
+    accession-number: [],
+    identification-number: [],
+    document-type: [],
+    type-of-record: [],
+    contents-code: [],
+    text-lang: [],
+    abstract-lang: [],
+    publication: (
+      publisher: [],
+      country: [],
+      locality: [],
+      place: [],
+      year: [],
+    ),
+    physical: auto,
+    subject-keywords: [],
+    uc: [],
+    holding-data: [],
+    note: [],
+    accepted-date: [],
+    defense: (
+      date: [],
+      president: [],
+      member1: [],
+      member2: [],
+      mentor: [],
+    ),
   ),
 
   bibliography: none,
@@ -77,7 +138,7 @@
 
   style: style,
   body,
-  ..args,
+  ..sink,
 ) = {
   set document(
     title: title,
@@ -88,51 +149,31 @@
   set page(
     margin: margin,
     paper: paper,
-    supplement: [стр.],
   )
 
-  show figure.where(kind: raw): set figure(supplement: [Листинг]) // use "listing" instead of "kod"
-  show figure.where(kind: "график"): set figure(supplement: [График])
-  show figure.where(kind: "алгоритам"): set figure(supplement: [Алгоритам])
+  show: style.pre
 
   set text(
     lang: "sr",
     region: "RS",
   )
 
-  set heading(supplement: none)
-
-  let _pagebreak(weak: true, to: if duplex { "odd" } else { none }) = {
+  let pagebreak(weak: true, to: if duplex { "odd" } else { none }) = {
     set page(header: none, footer: none)
-    pagebreak(weak: weak, to: to)
+    std.pagebreak(weak: weak, to: to)
   }
 
-  // auto pagebreak on h1
-  show heading.where(level: 1, outlined: true): h1 => {
-    // quick patch up
-    if h1.supplement != [Формулар] {
-      _pagebreak()
+  show heading.where(level: 1): h1 => context {
+    if chapter-relative-fig-nums {
+      let fig-kinds = query(figure).map(fig => fig.kind).dedup()
+
+      for kind in fig-kinds {
+        counter(figure.where(kind: kind)).update(0)
+      }
     }
 
     h1
   }
-
-  // reset figure counters each chapter/appendix
-  show heading.where(level: 1): h1 => {
-    counter(figure.where(kind: image)).update(0)
-    counter(figure.where(kind: table)).update(0)
-    counter(figure.where(kind: raw)).update(0)
-    counter(figure.where(kind: "график")).update(0)
-    counter(figure.where(kind: "алгоритам")).update(0)
-
-    h1
-  }
-
-  // figure numbered as <h1 count>.<count>
-  // no figures shall be used outside main/appendices
-  set figure(
-    numbering: n => numbering("1.1", counter(heading).get().first(), n),
-  )
 
   set page(numbering: "i")
 
@@ -148,7 +189,7 @@
     style: style,
   )
 
-  _pagebreak()
+  pagebreak()
   _assignment(
     assignment,
     title: title,
@@ -164,64 +205,114 @@
 
   {
     show: style.base
+    show heading.where(level: 1): h1 => pagebreak() + h1
 
-    outline()
+    {
+      set footnote.entry(separator: none)
+      show footnote: none
+      show footnote.entry: none
+
+      outlines.sum()
+    }
 
     _gls.glossary(
       show-all: glossary-all,
     )
   }
 
+  pagebreak()
+  metadata("page-count-reset")
+  counter(page).update(1)
+
   set page(numbering: "1")
 
   {
     show: style.base
+    show heading.where(level: 1): h1 => pagebreak() + h1
+
     {
-      _pagebreak()
-      [
-        #metadata("This is where front-matter ends right before page counter is reset")
-        <meta:front-matter-end>
-      ]
-      counter(page).update(1)
-
-      set heading(numbering: "1.1", supplement: [Потпоглавље]) // Одјељак?
-      show heading.where(level: 1): set heading(supplement: [Поглавље])
-
       show: style.main
+
+      counter(heading).update(0)
+
+      show heading.where(level: 1): h1 => h1 + metadata("h:chapter")
 
       body
     }
 
     bibliography
 
-    show-appendices(style: style)
+    {
+      show: style.appendices
+
+      counter(heading).update(0)
+
+      show heading.where(level: 1): h1 => h1 + metadata("h:appendix")
+
+      context appendices + _appendices.final()
+    }
 
     if type(bio) == str [
       = Биографија
-      #bio
-    ] else { bio }
+    ]
+
+    bio
   }
 
-  _pagebreak()
+  pagebreak()
   kwd(
-    ..args,
     lang: "sr",
-    title: title,
+    acession-number: accession-number,
+    identification-number: identification-number,
+    document-type: document-type,
+    type-of-record: type-of-record,
+    contents-code: contents-code,
     author: author,
     mentor: mentor,
+    title: title,
+    text-lang: text-lang,
+    abstract-lang: abstract-lang,
+    publication: publication,
+    physical: physical,
     field: field,
     discipline: discipline,
+    subject-keywords: subject-keywords,
+    uc: uc,
+    holding-data: holding-data,
+    note: note,
     abstract: abstract,
+    accepted-date: accepted-date,
+    defense: defense,
     style: style,
   )
 
-  _pagebreak()
+  pagebreak()
   kwd(
-    ..en,
     lang: "en",
+    acession-number: en.accession-number,
+    identification-number: en.identification-number,
+    document-type: en.document-type,
+    type-of-record: en.type-of-record,
+    contents-code: en.contents-code,
+    author: en.author,
+    mentor: en.mentor,
+    title: en.title,
+    text-lang: text-lang,
+    abstract-lang: abstract-lang,
+    publication: en.publication,
+    physical: en.physical,
+    field: en.field,
+    discipline: en.discipline,
+    subject-keywords: en.subject-keywords,
+    uc: en.uc,
+    holding-data: en.holding-data,
+    note: en.note,
+    abstract: en.abstract,
+    accepted-date: en.accepted-date,
+    defense: en.defense,
     style: style,
   )
 
-  _pagebreak()
+  pagebreak()
   conflict(style: style)
 }
