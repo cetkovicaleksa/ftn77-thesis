@@ -58,7 +58,7 @@
   date: auto,
   bio: none,
   glossary: (:),
-  glossary-links: false,
+  glossary-links: true,
   glossary-all: false,
   outlines: outlines,
   chapter-relative-fig-nums: true,
