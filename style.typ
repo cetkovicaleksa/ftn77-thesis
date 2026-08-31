@@ -186,7 +186,7 @@
   show heading.where(level: 1): align.with(center)
   show heading: align.with(left)
 
-  set par(justify: true)
+  set par(justify: true, first-line-indent: 1em)
   show par: set text(number-type: if old-style-numbers { "old-style" } else { "lining" })
 
   show terms: it => {

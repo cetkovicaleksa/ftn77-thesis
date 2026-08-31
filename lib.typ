@@ -46,6 +46,7 @@
   keywords: (),
   abstract: none,
   abstract-page: none,
+  dedication: none,
   acknowledgement: none,
   program: [],
   degree: [Основне академске студије],
@@ -209,6 +210,22 @@
     show: style.base
     show heading.where(level: 1): h1 => pagebreak() + h1
 
+    if type(dedication) in (str, bytes) {
+      show heading: hide
+      show heading: align.with(center + horizon)
+      set par(justify: false)
+      show par: place.with(center + horizon)
+
+      [= Посвета]
+
+      dedication
+    } else { dedication }
+
+    if type(acknowledgement) in (str, bytes) [
+      = Захвалница
+      #acknowledgement
+    ] else { acknowledgement }
+
     if abstract-page in ("sr", "both") [
       #if type(abstract) in (str, bytes) [= Извод]
       #abstract
@@ -218,19 +235,6 @@
       #if type(en.abstract) in (str, bytes) [= Abstract]
       #en.abstract
     ]
-
-    if type(acknowledgement) in (str, bytes) {
-      show heading: hide
-      show heading: align.with(center + horizon)
-      set par(justify: false)
-      show par: place.with(center + horizon)
-
-      [= Захвалница]
-
-      acknowledgement
-    } else {
-      acknowledgement
-    }
 
     {
       set footnote.entry(separator: none)
