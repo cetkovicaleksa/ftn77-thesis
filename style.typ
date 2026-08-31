@@ -18,8 +18,8 @@
   title-size: 17pt,
   title-outlined: false,
   title-bookmarked: true,
-  body-font: ("Times New Roman", "Liberation Serif", "Libertinus Serif"),
-  sans-font: ("Arial", "Liberation Sans", "Libertinus Serif"),
+  body-font: ("Times New Roman", "Liberation Serif"),
+  sans-font: ("Arial", "Liberation Sans"),
   logo-scale: 80%,
   margin: 1.5cm,
 ) = context {
@@ -65,8 +65,8 @@
     10pt * form-factor(),
     font: (
       "Arial",
-      // "Liberation Sans",
       "Segoe UI Symbol",
+      "Liberation Sans",
       "Noto Sans Symbols2",
     ),
   )
@@ -81,8 +81,8 @@
     9pt * form-factor(),
     font: (
       "Arial",
-      // "Liberation Sans",
       "Segoe UI Symbol",
+      "Liberation Sans",
       "Noto Sans Symbols2",
     ),
   )
@@ -107,11 +107,11 @@
 #let base(
   body,
   body-size: 11pt,
-  body-font: ("Times New Roman", "Segoe UI Symbol"),
+  body-font: ("Times New roman", "Segoe UI Symbol", "Liberation Serif", "Noto Sans Symbols2"),
   math-size: 11pt,
-  math-font: "Cambria Math",
+  math-font: ("Cambria Math", "Tex Gyre Pagella Math", "Libertinus Math"),
   raw-size: 10pt,
-  raw-font: "Courier New",
+  raw-font: ("Courier New", "Liberation Mono"),
   accent: navy,
 ) = {
   set text(
@@ -129,7 +129,6 @@
   show outline: set heading(outlined: true)
   show outline.entry: it => {
     show repeat: set text(accent)
-    // show repeat: set text(font: ("Cambria Math", "Times New Roman")) // cambria uses squared dots
 
     if it.element.func() == heading {
       it
