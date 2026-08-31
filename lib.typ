@@ -262,7 +262,7 @@
   pagebreak()
   kwd(
     lang: "sr",
-    acession-number: accession-number,
+    accession-number: accession-number,
     identification-number: identification-number,
     document-type: document-type,
     type-of-record: type-of-record,
@@ -289,7 +289,7 @@
   pagebreak()
   kwd(
     lang: "en",
-    acession-number: en.accession-number,
+    accession-number: en.accession-number,
     identification-number: en.identification-number,
     document-type: en.document-type,
     type-of-record: en.type-of-record,
