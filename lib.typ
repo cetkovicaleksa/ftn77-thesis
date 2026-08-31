@@ -86,14 +86,12 @@
     president: [],
     member1: [],
     member2: [],
-    mentor: [],
   ),
 
   en: (
     title: [],
     author: (
       name: "Imenko Prezimić",
-      id: "",
     ),
     mentor: (
       name: "Ranko Prezimić",
@@ -105,8 +103,6 @@
     field: [],
     discipline: [],
 
-    accession-number: [],
-    identification-number: [],
     document-type: [],
     type-of-record: [],
     contents-code: [],
@@ -117,20 +113,15 @@
       country: [],
       locality: [],
       place: [],
-      year: [],
     ),
-    physical: auto,
     subject-keywords: [],
     uc: [],
     holding-data: [],
     note: [],
-    accepted-date: [],
     defense: (
-      date: [],
       president: [],
       member1: [],
       member2: [],
-      mentor: [],
     ),
   ),
 
@@ -315,15 +306,18 @@
       abstract
     },
     accepted-date: accepted-date,
-    defense: defense,
+    defense: (
+      mentor: mentor.name,
+      ..defense,
+    ),
     style: style,
   )
 
   pagebreak()
   kwd(
     lang: "en",
-    accession-number: en.accession-number,
-    identification-number: en.identification-number,
+    accession-number: en.at("accession-number", default: accession-number),
+    identification-number: en.at("identification-number", default: identification-number),
     document-type: en.document-type,
     type-of-record: en.type-of-record,
     contents-code: en.contents-code,
@@ -332,8 +326,11 @@
     title: en.title,
     text-lang: text-lang,
     abstract-lang: abstract-lang,
-    publication: en.publication,
-    physical: en.physical,
+    publication: (
+      year: publication.year,
+      ..en.publication,
+    ),
+    physical: en.at("physical", default: physical),
     field: en.field,
     discipline: en.discipline,
     subject-keywords: en.subject-keywords,
@@ -346,8 +343,12 @@
 
       en.abstract
     },
-    accepted-date: en.accepted-date,
-    defense: en.defense,
+    accepted-date: en.at("accepted-date", default: accepted-date),
+    defense: (
+      mentor: en.mentor.name,
+      date: defense.date,
+      ..en.defense,
+    ),
     style: style,
   )
 
