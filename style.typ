@@ -114,6 +114,7 @@
   raw-font: ("Courier New", "Liberation Mono"),
   accent: navy,
   url-footnotes: true,
+  old-style-numbers: true,
 ) = {
   set text(
     body-size,
@@ -179,6 +180,7 @@
   show heading: align.with(left)
 
   set par(justify: true)
+  show par: set text(number-type: if old-style-numbers { "old-style" } else { "lining" })
 
   show terms: it => {
     show repeat: set text(accent)
@@ -209,6 +211,8 @@
   show table: set text(number-type: "lining", number-width: "tabular")
 
   show cite.where(form: "normal"): set text(number-type: "lining", number-width: "tabular")
+
+  show ref.where().or(link).or(footnote): set text(number-type: "lining")
 
   body
 }
