@@ -35,6 +35,7 @@
 
 #let thesis(
   title: [],
+  cover-title: auto,
   author: (
     name: "Именко Презимић",
     id: "",
@@ -178,7 +179,7 @@
   } else {
     cover
   }(
-    title: title,
+    title: cover-title,
     author: author,
     date: date,
     degree: degree,
