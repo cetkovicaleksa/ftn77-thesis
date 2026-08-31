@@ -49,6 +49,8 @@
   field: [],
   discipline: [],
   assignment: [],
+  assignment-number: [],
+  assignment-date: [],
   date: auto,
   bio: none,
   glossary: (:),
@@ -135,6 +137,7 @@
   margin: (x: 2cm, y: 2.5cm),
   new-cover: false,
   duplex: false,
+  copy-for: none,
 
   style: style,
   body,
@@ -198,6 +201,9 @@
     field: field,
     author: author,
     mentor: mentor,
+    copy-for: copy-for,
+    date: assignment-date,
+    number: assignment-number,
     style: style,
   )
 

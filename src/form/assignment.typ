@@ -15,6 +15,7 @@
   mentor: (name: ""),
   date: sym.space,
   number: sym.space,
+  copy-for: none,
   style: style,
   ..sink,
 ) = [
@@ -22,7 +23,7 @@
   #show: style.form
   #set text(lang: "sr", region: "RS")
 
-  #assignment-form-heading(style: style)[Задатак за завршни рад]
+  #assignment-form-heading(number: number, date: date, style: style)[Задатак за завршни рад]
 
   #show heading: upper
   #set list(marker: "-", indent: 1.5em, body-indent: 1.5em)
@@ -103,8 +104,10 @@
         spacing: 0.5em,
 
         [Примерак за:],
-        [#sym.ballot #sym.hyph Студента;],
-        [#sym.ballot #sym.hyph Ментора],
+        [#if copy-for in ("student", [student]) { sym.ballot.cross } else { sym.ballot } #sym.hyph
+          Студента;],
+        [#if copy-for in ("mentor", [mentor]) { sym.ballot.cross } else { sym.ballot } #sym.hyph
+          Ментора],
       )
     ]
   ]

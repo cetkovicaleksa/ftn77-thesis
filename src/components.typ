@@ -91,6 +91,7 @@
   let inset = 0.28em // 1mm on 10pt text
   let stroke = 1.5pt + black
   show heading: upper
+  let date = if date == auto { datetime.today() } else { date }
 
   layout(size => {
     grid(
@@ -157,7 +158,9 @@
           [Број:],
           [#number],
           [Датум:],
-          if type(date) == datetime { date.display() } else { [#date] },
+          if type(date) == datetime [
+            #date.day().#numbering("I", date.month())#sym.space.nobreak#date.year().
+          ] else [#date],
         )
       ],
     )

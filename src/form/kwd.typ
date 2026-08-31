@@ -369,7 +369,12 @@
   holding-data: holding-data,
   note: note,
   abstract: abstract,
-  accepted-date: accepted-date,
+  accepted-date: if type(accepted-date) == datetime [
+    #accepted-date.day().#numbering(
+      "I",
+      accepted-date.month(),
+    )#sym.space.nobreak#accepted-date.year().
+  ] else { accepted-date },
   defense: defense,
   style: style,
 )
