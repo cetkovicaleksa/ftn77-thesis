@@ -167,6 +167,8 @@
       for kind in fig-kinds {
         counter(figure.where(kind: kind)).update(0)
       }
+
+      counter(math.equation).update(0)
     }
 
     h1

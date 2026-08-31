@@ -237,6 +237,10 @@
   set heading(supplement: [Потпоглавље])
   show heading.where(level: 1): set heading(supplement: [Поглавље])
 
+  set math.equation(
+    numbering: n => [(#numbering("1.1", counter(heading).get().first(), n))],
+  )
+
   set par(justify: true, first-line-indent: 1em)
 
   show: if hydra { _hydra.with(accent: accent) } else { body => body }
@@ -251,6 +255,9 @@
   )
   set figure(
     numbering: n => _common.sr-numbering(counter(heading).get().first(), n),
+  )
+  set math.equation(
+    numbering: n => [(#_common.sr-numbering(counter(heading).get().first(), n))],
   )
 
   set par(justify: true, first-line-indent: 1em)
