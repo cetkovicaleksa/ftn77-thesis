@@ -1,25 +1,48 @@
 #import "../style.typ" as style
 
-#let ftn-logo = image(
-  "../assets/logo/ftn-logo-light.svg",
-  height: 2.4cm,
-  width: auto,
-  alt: "ФТН лого",
-)
+#let ftn-logo-template = read("../assets/logo/ftn-logo.template.svg")
 
-#let ftn-logo-new = image(
-  "../assets/logo/logoftnnovi.png",
-  height: 1.8cm,
-  width: auto,
-  alt: "Нови ФТН лого",
-)
+#let ftn-logo = context {
+  let logo = ftn-logo-template.replace("{{COLOUR}}", text.fill.to-hex())
 
-#let uns-logo = image(
-  "../assets/logo/uns-logo-light.svg",
-  height: 2.28cm,
-  width: auto,
-  alt: "УНС лого",
-)
+  image(
+    bytes(logo),
+    height: 2.4cm,
+    width: auto,
+    alt: "ФТН лого",
+    format: "svg",
+  )
+}
+
+#let ftn-logo-new = pad(x: 2.4cm - 1.8cm)[
+  #image(
+    "../assets/logo/logoftnnovi.png",
+    height: 1.8cm,
+    width: auto,
+    alt: "Нови ФТН лого",
+  )
+]
+#let uns-logo-template = read("../assets/logo/uns-logo.template.svg")
+
+#let uns-logo = context {
+  let logo = uns-logo-template
+    .replace("{{COLOUR}}", text.fill.to-hex())
+    .replace(
+      "{{COLOURED_STROKE}}",
+      if text.fill not in (black, white) { text.fill.transparentize(50%).to-hex() } else {
+        "#6f90bc"
+      },
+    )
+
+  pad(2.4cm - 2.28cm)[
+    #image(
+      bytes(logo),
+      height: 2.28cm,
+      width: auto,
+      alt: "УНС лого",
+    )
+  ]
+}
 
 #let form-heading(
   style: style,
