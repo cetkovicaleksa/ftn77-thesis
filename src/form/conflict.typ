@@ -4,14 +4,14 @@
 #let conflict(
   style: style,
   ..sink,
-) = [
+) = context [
   #show: style.form
   #set text(lang: "sr", region: "RS")
 
   #form-heading(style: style)[Изјава о непостојању сукоба интереса]
 
   #set text(size: 1.2em)
-  #set line(stroke: .7pt + black)
+  #set line(stroke: 0.07em + text.fill)
 
   #show stack.where(dir: ltr): set stack(spacing: 0.2em)
   #show stack.where(dir: ttb): set stack(spacing: 5.5em)

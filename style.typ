@@ -1,6 +1,7 @@
 #import "src/common.typ" as _common
 
 #let cyan = rgb("41BACB")
+#let teal = cyan // cyan is not present in std but teal is
 #let blue = rgb("044B53")
 #let navy = rgb("003153")
 #let aqua = rgb("44BCCC")
@@ -8,45 +9,49 @@
 #let red = rgb("AD1E20")
 #let purple = rgb("C201C9")
 #let yellow = rgb("eb996f")
+#let gold = rgb("#d4a72c")
 
 
 #let form-factor() = if page.width != auto { page.width / 21cm } else { 1 }
 
 #let cover(
   body,
-  body-size: 12pt,
-  title-size: 17pt,
+  body-size: auto,
+  title-size: auto,
   title-outlined: false,
   title-bookmarked: true,
   body-font: ("Times New Roman", "Liberation Serif"),
   sans-font: ("Arial", "Liberation Sans"),
-  logo-scale: 80%,
-  margin: 1.5cm,
+  logo-scale: auto,
+  margin: auto,
+  fill: none,
+  text-fill: black,
 ) = context {
-  set page(footer: none, header: none)
-  set page(margin: margin)
+  set page(footer: none, header: none, fill: fill)
+  set page(margin: if margin == auto { 1.5cm * form-factor() } else { margin })
   set text(
-    body-size,
+    if body-size == auto { 12pt * form-factor() } else { body-size },
     font: body-font,
     hyphenate: false,
+    fill: text-fill,
   )
-
-  // show regex("\b(?i)oram\b"): _ => smallcaps[oram]
 
   show title: block.with(width: 90%)
   show title: align.with(center)
-  show title: set text(title-size, font: sans-font)
+  show title: set text(
+    if title-size == auto { 17pt * form-factor() } else { title-size },
+    font: sans-font,
+  )
   show title: set par(justify: false)
 
-  // show logos a bit smaller than usual
-  show image: scale.with(logo-scale * form-factor(), reflow: true)
+  show image: scale.with(
+    100% * if logo-scale == auto { 80% * form-factor() } else { logo-scale },
+    reflow: true,
+  )
 
   set grid(inset: (bottom: 0.67em, left: 0.16em, right: 0.16em))
-  set grid.hline(stroke: black + 0.5pt)
+  set grid.hline(stroke: text-fill + 0.5pt)
 
-  // not really for style, but anyways
-  // include cover in bookmarks
-  set heading(outlined: false, bookmarked: true, numbering: none)
   show heading: hide
   show heading: place.with(center + top)
   heading(
@@ -59,16 +64,15 @@
   body
 }
 
-#let form(body) = context {
+#let form(
+  body-size: auto,
+  body-font: ("Arial", "Segoe UI Symbol", "Liberation Sans", "Noto Sans Symbols2"),
+  body,
+) = context {
   set page(footer: none, header: none)
   set text(
     10pt * form-factor(),
-    font: (
-      "Arial",
-      "Segoe UI Symbol",
-      "Liberation Sans",
-      "Noto Sans Symbols2",
-    ),
+    font: body-font,
   )
 
   set table(inset: .5em)
@@ -76,18 +80,21 @@
   body
 }
 
-#let form-heading(body) = context {
+#let form-heading(
+  logo-scale: auto,
+  body-size: auto,
+  body-font: ("Arial", "Segoe UI Symbol", "Liberation Sans", "Noto Sans Symbols2"),
+  body,
+) = context {
   set text(
     9pt * form-factor(),
-    font: (
-      "Arial",
-      "Segoe UI Symbol",
-      "Liberation Sans",
-      "Noto Sans Symbols2",
-    ),
+    font: body-font,
   )
 
-  show image: scale.with(100% * form-factor(), reflow: true)
+  show image: scale.with(
+    100% * if logo-scale == auto { form-factor() } else { logo-scale },
+    reflow: true,
+  )
 
   body
 }
@@ -167,8 +174,8 @@
   set list(marker: lvl => text(accent)[#(
     sym.bullet,
     sym.bullet.stroked,
-    sym.bullet.tri,
     sym.bullet.op,
+    sym.bullet.tri,
   ).at(lvl, default: sym.hyph)])
 
   show heading: set text(accent, hyphenate: false, number-type: "lining")

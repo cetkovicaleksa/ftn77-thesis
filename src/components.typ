@@ -48,7 +48,7 @@
   style: style,
   lang: auto,
   body,
-) = context {
+) = {
   import style: gray
   show: style.form-heading
 
@@ -61,7 +61,7 @@
       columns: (auto, 1fr),
       rows: measure(ftn-logo).height / 2 + inset,
       align: center + horizon,
-      stroke: 0.15em + black,
+      stroke: 0.15em + text.fill,
       inset: inset,
 
       grid.cell(
@@ -112,11 +112,12 @@
 
   set heading(numbering: none, supplement: [Формулар], outlined: true, bookmarked: true)
   let inset = 0.28em // 1mm on 10pt text
-  let stroke = 1.5pt + black
   show heading: upper
   let date = if date == auto { datetime.today() } else { date }
 
   layout(size => {
+    let stroke = 0.15em + text.fill
+
     grid(
       columns: (auto, 1fr, 0.35fr),
       rows: measure(ftn-logo).height / 2 + inset,

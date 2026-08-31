@@ -3,8 +3,8 @@
 #import "../../style.typ" as style
 
 
-#let _dashed = (dash: "densely-dashed", thickness: 0.11em, paint: black)
-#let _solid = 0.15em + black
+#let _dashed = (dash: "densely-dashed", thickness: 0.11em)
+#let _solid = 0.15em
 
 #let count = (
   appendices: context query(metadata.where(value: "h:appendix")).len(),
@@ -58,7 +58,7 @@
     mentor: [],
   ),
   style: style,
-) = [
+) = context [
   #show: style.form
   #set text(lang: "sr", region: "RS")
 
@@ -67,6 +67,8 @@
   #set par(justify: true)
 
   #set text(size: 0.9em)
+  #let _dashed = (.._dashed, paint: text.fill)
+  #let _solid = _solid + text.fill
 
   #align(
     center,
@@ -92,7 +94,7 @@
         [Врста рада, *ВР*:], contents-code,
         [Аутор, *АУ*:], author.name,
         [Ментор, *МН*:], mentor.name,
-        [Наслов рада, *НР*:], par[#title],
+        [Наслов рада, *НР*:], title,
         [Језик публикације, *ЈП*:], text-lang,
         [Језик извода, *ЈИ*:], abstract-lang,
         [Земља публиковања, *ЗП*:], publication.country,
@@ -109,11 +111,9 @@
             ],
           )
         ],
-        if physical == auto {
-          context [
-            #count.chapters/#count.pages/#count.citations/#count.tables/#count.images/#count.graphs/#count.appendices
-          ]
-        } else { physical },
+        if physical == auto [
+          #count.chapters/#count.pages/#count.citations/#count.tables/#count.images/#count.graphs/#count.appendices
+        ] else { physical },
 
         [Научна област, *НО*:], field,
         [Научна дисциплина, *НД*:], discipline,
@@ -121,7 +121,7 @@
         [*УДК*], uc,
         [Чува се, *ЧУ*:], holding-data,
         [Важна напомена, *ВН*:], note,
-        [Извод, *ИЗ*:], par[#abstract],
+        [Извод, *ИЗ*:], abstract,
         [Датум прихватања теме, *ДП*:], accepted-date,
         [Датум одбране, *ДО*:], defense.date,
 
@@ -203,7 +203,7 @@
     mentor: [],
   ),
   style: style,
-) = [
+) = context [
   #show: style.form
   #set text(lang: "en", region: "UK")
 
@@ -212,6 +212,8 @@
   #set par(justify: true)
 
   #set text(size: 0.9em)
+  #let _dashed = (.._dashed, paint: text.fill)
+  #let _solid = _solid + text.fill
 
   #align(
     center,
@@ -237,7 +239,7 @@
         [Contents code, *CC*:], contents-code,
         [Author, *AU*:], author.name,
         [Mentor, *MN*:], mentor.name,
-        [Title, *TI*:], par[#title],
+        [Title, *TI*:], title,
         [Language of text, *LT*:], text-lang,
         [Language of abstract, *LA*:], abstract-lang,
         [Country of publication, *CP*:], publication.country,
@@ -254,11 +256,9 @@
             ],
           )
         ],
-        if physical == auto {
-          context [
-            #count.chapters/#count.pages/#count.citations/#count.tables/#count.images/#count.graphs/#count.appendices
-          ]
-        } else { physical },
+        if physical == auto [
+          #count.chapters/#count.pages/#count.citations/#count.tables/#count.images/#count.graphs/#count.appendices
+        ] else { physical },
 
         [Scientific field, *SF*:], field,
         [Scientific discipline, *SD*:], discipline,
@@ -266,7 +266,7 @@
         [*UC*], uc,
         [Holding data, *HD*:], holding-data,
         [Note, *N*:], note,
-        [Abstract, *AB*:], par[#abstract],
+        [Abstract, *AB*:], abstract,
         [Accepted by the Scientific Board on, *ASB*:], accepted-date,
         [Defended on, *DE*:], defense.date,
 

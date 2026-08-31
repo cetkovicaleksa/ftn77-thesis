@@ -1,10 +1,6 @@
 #import "../components.typ": assignment-form-heading
 #import "../../style.typ" as style
 
-#let _hairline = black + 0.05pt
-#let _very_thin = black + 0.5pt
-#let _medium = black + 1.5pt
-
 #let assignment(
   body,
   title: auto,
@@ -18,16 +14,21 @@
   copy-for: none,
   style: style,
   ..sink,
-) = [
+) = context [
   #import style: gray
   #show: style.form
   #set text(lang: "sr", region: "RS")
+
+  #let _hairline = text.fill + 0.005em
+  #let _very_thin = text.fill + 0.05em
+  #let _medium = text.fill + 0.15em
 
   #assignment-form-heading(number: number, date: date, style: style)[Задатак за завршни рад]
 
   #show heading: upper
   #set list(marker: "-", indent: 1.5em, body-indent: 1.5em)
   #set table(stroke: _hairline)
+  #set par(justify: true, first-line-indent: 0pt)
 
   #v(0.3fr)
 
@@ -80,7 +81,7 @@
   #heading(level: 2, outlined: false, bookmarked: false)[Текст задатка:]
 
   #rect(width: 100%, stroke: _medium, height: 4fr, inset: 0.67em)[
-    #par(justify: true)[#body]
+    #body
   ]
 
   #align(bottom)[
