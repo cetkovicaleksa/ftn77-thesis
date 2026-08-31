@@ -113,6 +113,7 @@
   raw-size: 10pt,
   raw-font: ("Courier New", "Liberation Mono"),
   accent: navy,
+  url-footnotes: true,
 ) = {
   set text(
     body-size,
@@ -145,18 +146,21 @@
   }
   show link: it => {
     if type(it.dest) == str {
-      set text(accent)
-      it
+      text(accent)[#it]
+
+      if (
+        url-footnotes
+          and it.body != [#it.dest]
+          and ("http", "https", "ftp").any(proto => it.dest.starts-with(proto))
+          and it.body != [#it.dest.replace(regex("^\w+://((www\.)?(doi.org/))?"), "")]
+      ) {
+        footnote[#link(it.dest)]
+      }
     } else {
       it
     }
   }
-  // show footnote: set text(blue)
   set footnote.entry(separator: line(stroke: 0.3pt + accent, length: 30%))
-  // show footnote.entry: it => {
-  //   show regex("^\d+\b"): set text(blue)
-  //   it
-  // }
 
   set enum(numbering: n => text(accent)[#numbering("1.", n)])
   set list(marker: lvl => text(accent)[#(
