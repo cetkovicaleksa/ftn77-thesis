@@ -256,7 +256,7 @@
     show heading.where(level: 1): h1 => pagebreak() + h1
 
     {
-      show: style.main
+      show: style.main.with(chapter-relative-fig-nums: chapter-relative-fig-nums)
 
       counter(heading).update(0)
 
@@ -268,7 +268,7 @@
     bibliography
 
     {
-      show: style.appendices
+      show: style.appendices.with(chapter-relative-fig-nums: chapter-relative-fig-nums)
 
       counter(heading).update(0)
 

@@ -190,10 +190,6 @@
     it
   }
 
-  set figure(
-    numbering: n => numbering("1.1", counter(heading).get().first(), n),
-  )
-
   set figure.caption(separator: sym.colon, position: bottom)
   show figure.where(kind: table): set figure.caption(position: top)
 
@@ -232,35 +228,59 @@
   body
 }
 
-#let main(body, hydra: true, accent: navy) = {
-  set heading(numbering: "1.1")
-  set heading(supplement: [Потпоглавље])
+#let main(
+  hydra: true,
+  accent: navy,
+  chapter-relative-fig-nums: true,
+  body,
+) = {
+  set heading(
+    numbering: "1.1",
+    supplement: [Потпоглавље],
+  )
   show heading.where(level: 1): set heading(supplement: [Поглавље])
-
+  set figure(
+    numbering: if chapter-relative-fig-nums {
+      n => numbering("1.1", counter(heading).get().first(), n)
+    } else { "1" },
+  )
   set math.equation(
-    numbering: n => [(#numbering("1.1", counter(heading).get().first(), n))],
+    numbering: if chapter-relative-fig-nums {
+      n => numbering("(1.1)", counter(heading).get().first(), n)
+    } else { "(1)" },
   )
 
   set par(justify: true, first-line-indent: 1em)
 
-  show: if hydra { _hydra.with(accent: accent) } else { body => body }
+  show: if hydra { _hydra.with(accent: accent) } else { text }
 
   body
 }
 
-#let appendices(body, accent: navy) = {
+#let appendices(
+  hydra: false,
+  accent: navy,
+  chapter-relative-fig-nums: true,
+  body,
+) = {
   set heading(
     numbering: _common.sr-numbering,
     supplement: [Додатак],
   )
   set figure(
-    numbering: n => _common.sr-numbering(counter(heading).get().first(), n),
+    numbering: if chapter-relative-fig-nums {
+      n => _common.sr-numbering(counter(heading).get().first(), n)
+    } else { "1" },
   )
   set math.equation(
-    numbering: n => [(#_common.sr-numbering(counter(heading).get().first(), n))],
+    numbering: if chapter-relative-fig-nums {
+      n => [(#_common.sr-numbering(counter(heading).get().first(), n))]
+    } else { "(1)" },
   )
 
   set par(justify: true, first-line-indent: 1em)
+
+  show: if hydra { _hydra.with(accent: accent) } else { text }
 
   body
 }
