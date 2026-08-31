@@ -2,8 +2,9 @@
 
 #let cyan = rgb("41BACB")
 #let blue = rgb("044B53")
-#let teal = rgb("44BCCC")
-#let gray = rgb("E5E5E5")
+#let navy = rgb("003153")
+#let aqua = rgb("44BCCC")
+#let gray = rgb(0, 0, 0, 10.2%) // rgb("E5E5E5") on white bg
 #let red = rgb("AD1E20")
 #let purple = rgb("C201C9")
 #let yellow = rgb("eb996f")
@@ -111,7 +112,7 @@
   math-font: "Cambria Math",
   raw-size: 10pt,
   raw-font: "Courier New",
-  accent: blue,
+  accent: navy,
 ) = {
   set text(
     body-size,
@@ -209,7 +210,7 @@
   body
 }
 
-#let _hydra(body, accent: blue) = {
+#let _hydra(body, accent: navy) = {
   import "@preview/hydra:0.6.3": hydra
 
   set page(header: context {
@@ -224,7 +225,7 @@
   body
 }
 
-#let main(body, hydra: true, accent: blue) = {
+#let main(body, hydra: true, accent: navy) = {
   set heading(numbering: "1.1")
   set heading(supplement: [Потпоглавље])
   show heading.where(level: 1): set heading(supplement: [Поглавље])
@@ -236,7 +237,7 @@
   body
 }
 
-#let appendices(body, accent: blue) = {
+#let appendices(body, accent: navy) = {
   set heading(
     numbering: _common.sr-numbering,
     supplement: [Додатак],
