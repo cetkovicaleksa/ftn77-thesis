@@ -44,6 +44,8 @@
   ),
   keywords: (),
   abstract: none,
+  abstract-page: none,
+  acknowledgement: none,
   program: [],
   degree: [Основне академске студије],
   field: [],
@@ -213,6 +215,29 @@
     show: style.base
     show heading.where(level: 1): h1 => pagebreak() + h1
 
+    if abstract-page in ("sr", "both") [
+      #if type(abstract) in (str, bytes) [= Извод]
+      #abstract
+    ]
+
+    if abstract-page in ("en", "both") [
+      #if type(en.abstract) in (str, bytes) [= Abstract]
+      #en.abstract
+    ]
+
+    if type(acknowledgement) in (str, bytes) {
+      show heading: hide
+      show heading: align.with(center + horizon)
+      set par(justify: false)
+      show par: place.with(center + horizon)
+
+      [= Захвалница]
+
+      acknowledgement
+    } else {
+      acknowledgement
+    }
+
     {
       set footnote.entry(separator: none)
       show footnote: none
@@ -258,9 +283,7 @@
       context appendices + _appendices.final()
     }
 
-    if type(bio) == str [
-      = Биографија
-    ]
+    if type(bio) in (str, bytes) [= Биографија]
 
     bio
   }
@@ -285,8 +308,12 @@
     subject-keywords: subject-keywords,
     uc: uc,
     holding-data: holding-data,
-    note: note,
-    abstract: abstract,
+    abstract: {
+      set heading(outlined: false, bookmarked: false)
+      show heading.where().or(terms): none
+
+      abstract
+    },
     accepted-date: accepted-date,
     defense: defense,
     style: style,
@@ -313,7 +340,12 @@
     uc: en.uc,
     holding-data: en.holding-data,
     note: en.note,
-    abstract: en.abstract,
+    abstract: {
+      set heading(outlined: false, bookmarked: false)
+      show heading.where().or(terms): none
+
+      en.abstract
+    },
     accepted-date: en.accepted-date,
     defense: en.defense,
     style: style,
