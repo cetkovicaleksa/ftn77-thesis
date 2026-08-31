@@ -18,6 +18,7 @@
     ..query(metadata.where(value: "page-count-reset"))
       .map(it => it.location())
       .map(loc => counter(page).at(loc).first() - 1),
+    -query(metadata.where(value: "empty-page")).len(),
   ).sum(),
   listings: context query(figure.where(kind: raw)).len(),
 )

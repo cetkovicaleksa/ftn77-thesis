@@ -159,7 +159,7 @@
   )
 
   let pagebreak(weak: true, to: if duplex { "odd" } else { none }) = {
-    set page(header: none, footer: none)
+    set page(header: metadata("empty-page"), footer: none)
     std.pagebreak(weak: weak, to: to)
   }
 
