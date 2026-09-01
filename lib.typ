@@ -211,6 +211,16 @@
     show: style.base
     show heading.where(level: 1): h1 => pagebreak() + h1
 
+    if abstract-page in ("sr", "both") [
+      #if type(abstract) in (str, bytes) [= Извод]
+      #abstract
+    ]
+
+    if abstract-page in ("en", "both") [
+      #if type(en.abstract) in (str, bytes) [= Abstract]
+      #en.abstract
+    ]
+
     if type(dedication) in (str, bytes) {
       show heading: hide
       show heading: align.with(center + horizon)
@@ -226,16 +236,6 @@
       = Захвалница
       #acknowledgement
     ] else { acknowledgement }
-
-    if abstract-page in ("sr", "both") [
-      #if type(abstract) in (str, bytes) [= Извод]
-      #abstract
-    ]
-
-    if abstract-page in ("en", "both") [
-      #if type(en.abstract) in (str, bytes) [= Abstract]
-      #en.abstract
-    ]
 
     {
       set footnote.entry(separator: none)
