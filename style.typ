@@ -331,6 +331,7 @@
     }
 
     let term = if entry.long != none { entry.long } else { entry.short }
+    let term = upper(term.first()) + term.slice(term.first().len())
 
     [
       / #term: #entry.description#reference #h(1fr) #entry.pages.join(", ")

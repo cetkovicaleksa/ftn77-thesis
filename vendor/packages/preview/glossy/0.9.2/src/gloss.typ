@@ -424,10 +424,10 @@
       (article, term)
     } else if article == none {
       // No article present, so capitalize the term's first letter.
-      (article, upper(term.first()) + term.slice(1))
+      (article, upper(term.first()) + term.slice(term.first().len()))
     } else {
       // Article is present; capitalize its first letter instead.
-      (upper(article.first()) + article.slice(1), term)
+      (upper(article.first()) + article.slice(article.first().len()), term)
     }
   }
 
