@@ -1,6 +1,7 @@
 #import "src/common.typ": azbuka, graph, sr-numbering
 #import "src/components.typ": (
-  assignment-form-heading, form-heading, ftn-logo, ftn-logo-new, uns-logo,
+  assignment-form-heading, form-heading, ftn-logo, ftn-logo-new, ftn-logo-template, uns-logo,
+  uns-logo-template,
 )
 #import "style.typ" as style
 #import "src/pre.typ" as pre
@@ -14,7 +15,7 @@
 #import "src/form/conflict.typ": conflict
 
 
-#let bibliography = std.bibliography.with(style: "assets/csl/ieee.xml")
+#let bibliography = std.bibliography.with(style: style.ieee)
 
 #let _appendices = state("appendices", none)
 

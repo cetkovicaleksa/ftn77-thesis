@@ -1,7 +1,13 @@
 #import "src/common.typ" as _common
 
+/// IEEE csl for bibliography style
+#let ieee = path("assets/csl/ieee.xml")
+/// GitHub Light tmTheme for code blocks
+#let gh-light = path("assets/theme/GitHub Light.tmTheme")
+
+/// Deprecated use teal instead since cyan is not present in std
 #let cyan = rgb("41BACB")
-#let teal = cyan // cyan is not present in std but teal is
+#let teal = cyan
 #let blue = rgb("044B53")
 #let navy = rgb("003153")
 #let aqua = rgb("44BCCC")
@@ -128,7 +134,7 @@
     font: body-font,
   )
   show raw: set text(raw-size, font: raw-font)
-  set raw(theme: "assets/theme/GitHub Light.tmTheme")
+  set raw(theme: gh-light)
   show math.equation: set text(math-size, font: math-font)
 
   show figure.where(kind: raw): set figure(supplement: [Листинг])
