@@ -2,7 +2,7 @@
 
 [![Open in Typst Web App](https://img.shields.io/badge/Open%20in-Typst%20Web%20App-239DAD?logo=typst)](https://typst.app/app?template=ftn77-thesis&version=0.2.0)
 [![Repository](https://img.shields.io/badge/Repository-GitHub-181717?logo=github)](https://github.com/cetkovicaleksa/ftn77-thesis)
-[![GitHub license](https://img.shields.io/github/license/cetkovicaleksa/ftn77-thesis)](https://github.com/cetkovicaleksa/ftn77-thesis/blob/main/LICENSE)
+[![GPL-3.0-or-later](https://img.shields.io/github/license/cetkovicaleksa/ftn77-thesis)](https://github.com/cetkovicaleksa/ftn77-thesis/blob/main/LICENSE)
 [![Releases](https://img.shields.io/github/v/release/cetkovicaleksa/ftn77-thesis?label=Releases)](https://github.com/cetkovicaleksa/ftn77-thesis/releases)
 
 A Typst template for writing Bachelor's/Master's theses at the Faculty of technical sciences, University of Novi Sad.
