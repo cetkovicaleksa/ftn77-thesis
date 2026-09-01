@@ -17,7 +17,7 @@
 .devcontainer.json linguist-language=JSON-with-Comments
 devcontainer.json linguist-language=JSON-with-Comments
 
-*.pdf          export-ignore
+thesis.pdf          export-ignore
 
 vendor/        export-ignore linguist-vendored
 
