@@ -1,5 +1,10 @@
 # FTN77 Thesis Template
 
+[![Open in Typst Web App](https://img.shields.io/badge/Open%20in-Typst%20Web%20App-239DAD?logo=typst)](https://typst.app/app?template=ftn77-thesis&version=0.2.0)
+[![Repository](https://img.shields.io/badge/Repository-GitHub-181717?logo=github)](https://github.com/cetkovicaleksa/ftn77-thesis)
+[![GitHub license](https://img.shields.io/github/license/cetkovicaleksa/ftn77-thesis)](https://github.com/cetkovicaleksa/ftn77-thesis/blob/main/LICENSE)
+[![Releases](https://img.shields.io/github/v/release/cetkovicaleksa/ftn77-thesis?label=Releases)](https://github.com/cetkovicaleksa/ftn77-thesis/releases)
+
 A Typst template for writing Bachelor's/Master's theses at the Faculty of technical sciences, University of Novi Sad.
 
 **⚠️ Disclaimer**
@@ -11,28 +16,36 @@ File [thesis.pdf](./thesis.pdf) provides an example of the compiled pdf, compile
 
 The main entry point of the template is the `thesis` function. It layouts the document to include all uni forms like so:
 
-- Cover (page i)
-- Assignment (Задатак за завршни рад)
+- Cover (page i) *
+- Assignment (Задатак за завршни рад) *
+- Abstract
+- Abstract en
+- Dedication
+- Acknowledgement
 - Heading and figure outlines
-- Abbrevations and terms
+- Abbrevations
+- Terms
 - 1 Main content (page 1)
 - Literature
 - A Appendices
 - Biography
-- Kwd (Кључна документација информација)
-- Kwd en (Key words documentation)
-- Conflict (Изјава о непостојању сукоба интереса)
+- Kwd (Кључна документација информација) *
+- Kwd en (Key words documentation) *
+- Conflict (Изјава о непостојању сукоба интереса) *
+
+*Required pages, the rest can be ommited
 
 If you want to use some other layout you can use the provided components on their own without relying on the main entry point.
 
 Some features of the template:
 
 - default styling which follows uni guidelines
-    - Guidelines reccomend microsoft proprietary fonts (Times, Arial, and Courier New - Cambria Math selected to match) so ensure you have those installed to avoid fallbacks to typst otf fonts
+    - Guidelines reccomend microsoft proprietary fonts (Times, Arial, and Courier New - Cambria Math selected to match) which are used as primary fonts (and should be especially for form pages) but fallback to their liberation equivallents so will look pretty much the same in the Typst web app
 - customizable styling for most fragments
     - This is done by overriding named styles from the [style.typ](./style.typ), and passing it to the `thesis`
     - See starter [style.typ](./template/style.typ)
-    - Can look good on different page sizes (like a4 or iso-b5, etc.)
+    - Common varying args can be passed directly to `thesis` (like page margin, body font and size...)
+    - Can look good on different page sizes (like a4 or iso-b5, etc.), adjusting the margin and base font size (`style.base`) should suffice
 - uni forms (`assignment`, `kwd` and `conflict`)
     - These forms were custom written in Typst to match offical docx forms
     - By default auto scale to fit page, but custom style can set explicit sizing if needed
@@ -47,41 +60,57 @@ Some features of the template:
 - idiomatic page/figure numbering
     - Front-matter pages numbered with roman numerals, main starts at 1
     - Chapters numbered 1.1 while appendices А.1 (following serbian azbuka enumeration)
-    - Figure numbers are hierarchical in both main and appendices
+    - Figure numbers are hierarchical in both main and appendices (can be disabled with `chapter-relative-fig-nums` argument)
         - For example, first chapter figures "Слика 1.1", "Слика 1.2", ... then second "Слика 2.1", ... then in appendix 2 "Слика Б.1"
 - abbrevation/terms lists with indexes
     - Thanks to the [glossy](https://typst.app/universe/package/glossy/) package
     - Supports terms which are also abbrevations and are included in both lists. Distinguished by group "term", "abbr" or no specified group for both.
     - Only abbrevations are cross referenced while terms are one way.
+- footnotes for url links that have shortened display text (can be disabled with `url-footnotes` argument)
 - support for export to any pdf standard Typst supports (as of Typst@0.15.0)
 
 ## Usage
 
-[Typst@0.15.0](https://github.com/typst/typst/tree/v0.15.0) was used for development, so ensure your typst is up to date.
-
-Below is a minimal example of how to use the template:
+A minimal example of how to use the template is show below:
 
 ```typ
-#import "@preview/ftn77-thesis:0.1.0": appendices, thesis
+#import "@preview/ftn77-thesis:0.2.0": appendices, thesis
 
-#show: thesis.with() // specify args with metadata
+#show: thesis // use .with() to specify args with metadata
 
 // write your main content here
 
 #show: appendices
 
 // write your appendices here
+
 ```
 
-Reccommended way to get started is to use the provided [starter files](./template/) to initialize the project, which can be done with:
+Reccommended way to get started is to use the provided [starter files](./template/) to initialize the project.
+
+### Typst Web App
+
+Create a new project in the web app by clicking [here](https://typst.app/app?template=ftn77-thesis&version=0.2.0).
+
+### Locally
+
+[Typst@0.15.0](https://github.com/typst/typst/tree/v0.15.0) was used for development, so ensure your typst is up to date.
+
+Use Typst CLI to start a new project with the following command:
 
 ```bash
-$ typst init @preview/ftn77-thesis:0.1.0
-Successfully created new project from @preview/ftn77-thesis:0.1.0 🎉
+$ typst init @preview/ftn77-thesis:0.2.0
+Successfully created new project from @preview/ftn77-thesis:0.2.0 🎉
 To start writing, run:
 > cd ftn77-thesis
 > typst watch thesis.typ
 ```
+
+## Help & Feedback
+
+Found a problem or have a suggestion? [Open an issue](https://github.com/cetkovicaleksa/ftn77-thesis/issues) or [contact me](https://github.com/cetkovicaleksa) on GitHub.
+
+If you used this template to write your own thesis, I would love to see it 😁.
 
 ## License
 
