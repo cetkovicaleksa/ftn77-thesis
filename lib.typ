@@ -306,6 +306,7 @@
     subject-keywords: subject-keywords,
     uc: uc,
     holding-data: holding-data,
+    note: note,
     abstract: {
       set heading(outlined: false, bookmarked: false)
       show heading.where().or(terms): none
