@@ -83,7 +83,6 @@ A minimal example of how to use the template is show below:
 #show: appendices
 
 // write your appendices here
-
 ```
 
 Reccommended way to get started is to use the provided [starter files](./template/) to initialize the project.
