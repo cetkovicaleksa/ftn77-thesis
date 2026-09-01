@@ -63,6 +63,17 @@
   glossary-all: false,
   outlines: outlines,
   chapter-relative-fig-nums: true,
+  url-footnotes: true,
+  accent: style.navy,
+  old-style-numbers: true,
+  body-size: 11pt,
+  body-font: ("Times New roman", "Segoe UI Symbol", "Liberation Serif", "Noto Sans Symbols2"),
+  math-size: 11pt,
+  math-font: ("Cambria Math", "Tex Gyre Pagella Math", "Libertinus Math"),
+  raw-size: 10pt,
+  raw-font: ("Courier New", "Liberation Mono"),
+  hydra-main: true,
+  hydra-appendices: false,
   appendices: none,
   accession-number: [],
   identification-number: [],
@@ -208,7 +219,17 @@
   show: _gls.init-glossary.with(glossary, term-links: glossary-links)
 
   {
-    show: style.base
+    show: style.base.with(
+      body-size: body-size,
+      body-font: body-font,
+      math-size: math-size,
+      math-font: math-font,
+      raw-size: raw-size,
+      raw-font: raw-font,
+      accent: accent,
+      old-style-numbers: old-style-numbers,
+      url-footnotes: url-footnotes,
+    )
     show heading.where(level: 1): h1 => pagebreak() + h1
 
     if abstract-page in ("sr", "both") [
@@ -257,11 +278,25 @@
   set page(numbering: "1")
 
   {
-    show: style.base
+    show: style.base.with(
+      body-size: body-size,
+      body-font: body-font,
+      math-size: math-size,
+      math-font: math-font,
+      raw-size: raw-size,
+      raw-font: raw-font,
+      accent: accent,
+      old-style-numbers: old-style-numbers,
+      url-footnotes: url-footnotes,
+    )
     show heading.where(level: 1): h1 => pagebreak() + h1
 
     {
-      show: style.main.with(chapter-relative-fig-nums: chapter-relative-fig-nums)
+      show: style.main.with(
+        accent: accent,
+        hydra: hydra-main,
+        chapter-relative-fig-nums: chapter-relative-fig-nums,
+      )
 
       counter(heading).update(0)
 
@@ -273,7 +308,11 @@
     bibliography
 
     {
-      show: style.appendices.with(chapter-relative-fig-nums: chapter-relative-fig-nums)
+      show: style.appendices.with(
+        accent: accent,
+        hydra: hydra-appendices,
+        chapter-relative-fig-nums: chapter-relative-fig-nums,
+      )
 
       counter(heading).update(0)
 
