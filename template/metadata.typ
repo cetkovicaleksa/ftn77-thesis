@@ -12,11 +12,13 @@
   field: [Електротехничко и рачунарско инжењерство],
   discipline: [Примењене рачунарске науке и информатика],
   mentor: (
-    name: "Ранко Презимић",
+    name: "др, Ранко Презимић, Проф.",
   ),
-  // cover-title: [], // use \ to explicitly break the title into rows if needed
+  copy-for: "student", // student/mentor
   assignment: lorem(50),
-  date: datetime(day: 1, month: 8, year: 2049),
+  assignment-number: 1,
+  assignment-date: [1.I 2049],
+  date: "2049", // just year or datetime obj
 
   accession-number: 0,
   identification-number: 0,
@@ -33,17 +35,17 @@
     year: [2049],
   ),
   physical: auto, // counts auto calculated unless content provided
-  subject-keywords: [],
-  uc: [],
+  subject-keywords: [...],
+  uc: [...],
   holding-data: [У библиотеци Факултета техничких наука, Нови Сад],
-  note: [],
-  accepted-date: [],
+  note: [...],
+  accepted-date: [...],
   defense: (
-    date: [],
-    president: [],
-    member1: [],
-    member2: [],
-    mentor: [Др Ранко Презимић, Проф.],
+    date: [1.XII 2049.],
+    president: [...],
+    member1: [...],
+    member2: [...],
+    // mentor: [Др Ранко Презимић, Проф.],
   ),
 
   en: (
@@ -58,11 +60,9 @@
     field: [Electrical and Computer Engineering],
     discipline: [Applied computer science and informatics],
     mentor: (
-      name: "Ranko Prezimić",
+      name: "Ranko Prezimić, Phd, prof.",
     ),
 
-    accession-number: 0,
-    identification-number: 0,
     document-type: [Monographic publication],
     type-of-record: [Textual printed material],
     contents-code: [Дипломски - бечелор рад],
@@ -73,20 +73,17 @@
       country: [Republic of Serbia],
       locality: [Vojvodina],
       place: [Novi Sad, Dositeja Obradovica sq. 6],
-      year: [2049],
     ),
-    physical: auto,
-    subject-keywords: [],
-    uc: [],
+    subject-keywords: [...],
+    uc: [...],
     holding-data: [The Library of Faculty of Technical Sciences, Novi Sad],
-    note: [],
-    accepted-date: [],
+    note: [...],
+    accepted-date: [...],
     defense: (
-      date: [],
-      president: [],
-      member1: [],
-      member2: [],
-      mentor: [Ranko Prezimić, Phd, professor],
+      president: [...],
+      member1: [...],
+      member2: [...],
+      // mentor: [Ranko Prezimić, Phd, professor],
     ),
   ),
 )

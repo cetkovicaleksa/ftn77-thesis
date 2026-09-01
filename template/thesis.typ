@@ -1,4 +1,4 @@
-#import "@local/ftn77-thesis:0.1.0": appendices, bibliography, ftn-logo-new, thesis
+#import "@preview/ftn77-thesis:0.1.0": appendices, bibliography, ftn-logo-new, thesis
 
 #import "metadata.typ": meta
 #import "style.typ" as style
@@ -7,32 +7,27 @@
   ..meta,
   paper: "a4",
   // margin: 2cm,
+  dedication: lorem(20),
+  abstract-page: "sr",
   duplex: true,
-  bibliography: bibliography("thesis.bib"), // uses ieee with custom serbian cyrl translations by default
+  bibliography: bibliography("literature.bib"), // uses ieee with custom serbian cyrl translations by default
+  glossary: yaml("glossary.yml"),
   style: style,
-  glossary: (
-    json: (
-      short: "JSON",
-      long: "JavaScript Object Notation",
-      group: "abbr",
-    ),
-    html: (
-      short: "HTML",
-      long: "HyperText Markup Language",
-      description: [
-        Описни језик специјално намењен опису веб страница. Помоћу њега се једноставно могу одвојити
-        елементи као што су наслови, параграфи, цитати и слично.
-      ],
-      // in both
-    ),
-  ),
 )
+
+// Include your main chapters here
+
+//region Remove before writing
 
 = Увод
 
 #lorem(100) @html
 
-#lorem(20) @fig:logo #lorem(10) @cetkovic2026ftn77
+@dependency[Зависност] неки текст // untill glossy cap is fixed (for multi byte unicode chars) you can cap like this (or install vendored glossy from template repository then use @dependency:cap)
+
+#lorem(20) #link("https://www.github.com")[www.github.com] #lorem(10) #link(
+  "https://facebook.com",
+)[Facebook] #lorem(10) @fig:logo #lorem(10) @cetkovic2026ftn77
 
 #figure(
   caption: [Лого ФТН-а],
@@ -41,11 +36,19 @@
 
 #lorem(1000)
 
+Мала @dependency
+
 == Дио увода
 
 #lorem(200)
 
+//endregion
+
 #show: appendices
+
+// Include your appendices here
+
+//region Remove before writing
 
 = Додатак
 
@@ -57,3 +60,5 @@
 )
 
 #lorem(100) @json
+
+//endregion

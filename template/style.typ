@@ -1,4 +1,4 @@
-#import "@local/ftn77-thesis:0.1.0": style as default
+#import "@preview/ftn77-thesis:0.1.0": style as default
 
 // Override your styles here. You can start from default style or scratch.
 // The base style is applied to all content besides forms and cover, main is applied
@@ -14,20 +14,16 @@
 #let cover = default.cover.with(margin: 1.5cm)
 
 #let base = default.base.with(
-  accent: blue, // uses blue from ftn site defined by default.blue, which is the default accent
+  accent: navy, // default accent is navy (engineer blue in default style actually)
   body-size: 11pt,
 )
 
-#let main(body) = {
-  show: default.main.with(accent: blue)
-
-  // additional styling starting from default main style, if changed also change the appendices style to reflect it
+#let main(body, ..sink) = {
+  show: default.main.with(accent: navy)
 
   body
 }
 
-#let appendices = default.appendices.with(accent: blue)
-
-// #let appendices = main
+#let appendices = default.appendices.with(accent: navy)
 
 // ... see default style module
