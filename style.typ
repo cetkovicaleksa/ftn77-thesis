@@ -134,6 +134,15 @@
   show figure.where(kind: raw): set figure(supplement: [Листинг])
   show figure.where(kind: _common.graph): set figure(supplement: [График])
 
+  show bibliography: bib => {
+    show link: l => {
+      show regex("^\w+://"): _ => none
+      l
+    }
+
+    bib
+  }
+
   show outline: it => if query(it.target).filter(it => it.outlined).len() > 0 { it } // hide outline if no entries
   show outline: set heading(outlined: true)
   show outline.entry: it => {
