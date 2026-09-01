@@ -8,11 +8,14 @@
   date: auto,
   style: style,
 ) = [
-  #let name = if author.name == auto { context document.author.first(default: [Именко Презимић]) } else { author.name }
-  #let year = if date == auto {
-    context if document.date != auto { document.date } else { datetime.today() }.display("[year]")
+  #let name = if author.name == auto {
+    context document.author.first(default: [Именко Презимић])
+  } else { author.name }
+  #let date = if date == auto { datetime.today() } else { date }
+  #let year = if type(date) == datetime {
+    date.year()
   } else {
-    date.display("[year]")
+    date
   }
 
   #show: style.cover
@@ -66,11 +69,14 @@
   date: auto,
   style: style,
 ) = [
-  #let name = if author.name == auto { context document.author.first(default: [Именко Презимић]) } else { author.name }
-  #let year = if date == auto {
-    context if document.date != auto { document.date } else { datetime.today() }.display("[year]")
+  #let name = if author.name == auto {
+    context document.author.first(default: [Именко Презимић])
+  } else { author.name }
+  #let date = if date == auto { datetime.today() } else { date }
+  #let year = if type(date) == datetime {
+    date.year()
   } else {
-    date.display("[year]")
+    date
   }
 
   #show: style.cover
