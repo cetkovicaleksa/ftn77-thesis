@@ -2,3 +2,4 @@ dist/
 tinymist.lock
 *.pdf
 !thesis.pdf
+!template/forms.pdf
