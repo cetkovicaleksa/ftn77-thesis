@@ -99,11 +99,7 @@ Create a new project in the web app by clicking [here](https://typst.app/app?tem
 Use Typst CLI to start a new project with the following command:
 
 ```bash
-$ typst init @preview/ftn77-thesis:0.2.0
-Successfully created new project from @preview/ftn77-thesis:0.2.0 🎉
-To start writing, run:
-> cd ftn77-thesis
-> typst watch thesis.typ
+typst init @preview/ftn77-thesis:0.2.0
 ```
 
 ## Help & Feedback
