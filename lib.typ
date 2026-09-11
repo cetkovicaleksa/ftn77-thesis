@@ -184,6 +184,8 @@
       counter(math.equation).update(0)
     }
 
+    counter(footnote).update(0)
+
     h1
   }
 
@@ -260,7 +262,7 @@
 
     {
       set footnote.entry(separator: none)
-      show footnote: none
+      show footnote: none // still increments footnote count
       show footnote.entry: none
 
       outlines.sum()
