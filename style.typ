@@ -42,8 +42,8 @@
     fill: text-fill,
   )
 
-  show title: block.with(width: 90%)
-  show title: align.with(center)
+  show title: set block(width: 90%)
+  show title: set align(center)
   show title: set text(
     if title-size == auto { 17pt * form-factor() } else { title-size },
     font: sans-font,
@@ -77,7 +77,7 @@
 ) = context {
   set page(footer: none, header: none)
   set text(
-    10pt * form-factor(),
+    if body-size == auto { 10pt * form-factor() } else { body-size },
     font: body-font,
   )
 
@@ -93,7 +93,7 @@
   body,
 ) = context {
   set text(
-    9pt * form-factor(),
+    if body-size == auto { 9pt * form-factor() } else { body-size },
     font: body-font,
   )
 
