@@ -2,6 +2,7 @@
 
 /// IEEE csl for bibliography style
 #let ieee = path("assets/csl/ieee.xml")
+#let ieee-cite = path("assets/csl/ieee-cite.xml")
 /// GitHub Light tmTheme for code blocks
 #let gh-light = path("assets/theme/GitHub Light.tmTheme")
 
@@ -140,14 +141,24 @@
   show figure.where(kind: raw): set figure(supplement: [Листинг])
   show figure.where(kind: _common.graph): set figure(supplement: [График])
 
+  show bibliography: set par(justify: false, spacing: 1em)
   show bibliography: bib => {
     show link: l => {
       show regex("^\w+://"): _ => none
       l
     }
+    show regex("\[\d+\]"): set text(number-width: "tabular", number-type: "lining") // only way i could think of at the moment
 
     bib
   }
+
+  set bibliography(style: ieee)
+  set cite(style: ieee-cite)
+
+  show cite.where(form: "normal").or(cite.where(form: "prose")): set text(
+    number-type: "lining",
+    number-width: "tabular",
+  )
 
   show outline: it => if query(it.target).filter(it => it.outlined).len() > 0 { it } // hide outline if no entries
   show outline: set heading(outlined: true)
@@ -227,8 +238,6 @@
   show figure.caption: set block(sticky: true)
 
   show table: set text(number-type: "lining", number-width: "tabular")
-
-  show cite.where(form: "normal"): set text(number-type: "lining", number-width: "tabular")
 
   show ref.where().or(link).or(footnote): set text(number-type: "lining")
 

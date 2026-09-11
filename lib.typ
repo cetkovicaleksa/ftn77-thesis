@@ -14,7 +14,7 @@
 #import "src/form/kwd.typ": kwd
 #import "src/form/conflict.typ": conflict
 
-
+/// Deprecated: use style.ieee* directly
 #let bibliography = std.bibliography.with(style: style.ieee)
 
 #let _appendices = state("appendices", none)
