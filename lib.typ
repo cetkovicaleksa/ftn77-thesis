@@ -189,7 +189,7 @@
     h1
   }
 
-  set page(numbering: "i", footer: none)
+  set page(numbering: "i", footer: none, header: none)
 
   if new-cover {
     cover-new
@@ -232,6 +232,7 @@
       old-style-numbers: old-style-numbers,
       url-footnotes: url-footnotes,
     )
+    set page(footer: none, header: none)
     show heading.where(level: 1): h1 => pagebreak() + h1
 
     if abstract-page in ("sr", "both") [
