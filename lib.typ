@@ -249,6 +249,7 @@
       show heading: align.with(center + horizon)
       set par(justify: false)
       show par: place.with(center + horizon)
+      set text(style: "italic", discretionary-ligatures: true, features: ("swsh",))
 
       [= Посвета]
 
