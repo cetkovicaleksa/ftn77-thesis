@@ -189,7 +189,7 @@
     h1
   }
 
-  set page(numbering: "i")
+  set page(numbering: "i", footer: none)
 
   if new-cover {
     cover-new
@@ -277,7 +277,7 @@
   metadata("page-count-reset")
   counter(page).update(1)
 
-  set page(numbering: "1")
+  set page(numbering: "1", footer: context align(center, counter(page).display()))
 
   {
     show: style.base.with(
