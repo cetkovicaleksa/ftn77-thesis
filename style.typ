@@ -110,10 +110,23 @@
   set page(
     number-align: center,
     supplement: [стр.],
-    // can set margin in style, overrides thesis::margin
   )
 
   // show smallcaps: set text(script: "Latn")
+
+  set smartquote(
+    quotes: (
+      double: "„”",
+      single: "’’",
+    ),
+  )
+
+  show smartquote.where(alternative: true): set smartquote(
+    quotes: (
+      double: "„“",
+      single: "‘’",
+    ),
+  )
 
   body
 }
