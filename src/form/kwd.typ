@@ -62,6 +62,12 @@
   #show: style.form
   #set text(lang: "sr", region: "RS")
 
+  #set page(footer: align(right)[
+    #text(0.9em)[
+      Образац *Q2.НА.04-05* - Издање 1
+    ]
+  ])
+
   #form-heading(style: style)[Кључна документација информација]
 
   #set par(justify: true)
@@ -160,12 +166,6 @@
       )
     ]
   ]
-
-  #align(right)[
-    #text(size: 1em)[
-      Образац *Q2.НА.04-05* - Издање 1
-    ]
-  ]
 ]
 
 #let _kwd-en(
@@ -206,6 +206,12 @@
 ) = context [
   #show: style.form
   #set text(lang: "en", region: "UK")
+
+  #set page(footer: align(right)[
+    #text(0.9em)[
+      Obrazac *Q2.НА.04-05* - Izdanje 1
+    ]
+  ])
 
   #form-heading(style: style)[Key Words Documentation]
 
@@ -302,12 +308,6 @@
           sym.space,
         ),
       )
-    ]
-  ]
-
-  #align(right)[
-    #text(size: 1em)[
-      Obrazac *Q2.НА.04-05* - Izdanje 1
     ]
   ]
 ]

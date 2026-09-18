@@ -19,6 +19,12 @@
   #show: style.form
   #set text(lang: "sr", region: "RS")
 
+  #set page(footer: align(right)[
+    #text(0.9em)[
+      Образац *Q2.НА.04-03* - Издање 1
+    ]
+  ])
+
   #let _hairline = text.fill + 0.005em
   #let _very_thin = text.fill + 0.05em
   #let _medium = text.fill + 0.15em
@@ -112,13 +118,6 @@
       )
     ]
   ]
-
-  #align(right)[
-    #text(size: 0.9em)[
-      Образац *Q2.НА.04-03* - Издање 1
-    ]
-  ]
-
 ]
 
 #assignment()[]

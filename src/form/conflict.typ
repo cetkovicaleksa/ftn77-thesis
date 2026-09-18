@@ -8,6 +8,12 @@
   #show: style.form
   #set text(lang: "sr", region: "RS")
 
+  #set page(footer: align(right)[
+    #text(0.9em)[
+      Obrazac *Q2.НА.04-05* - Izdanje 1
+    ]
+  ])
+
   #form-heading(style: style)[Изјава о непостојању сукоба интереса]
 
   #set text(size: 1.2em)
@@ -60,12 +66,6 @@
   ]
 
   #v(1fr)
-
-  #align(right)[
-    #text(size: 0.75em)[
-      Образац *Q2.НА.04-02* - Издање 1
-    ]
-  ]
 ]
 
 #conflict()
