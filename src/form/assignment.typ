@@ -80,7 +80,7 @@
 
   #heading(level: 2, outlined: false, bookmarked: false)[Наслов завршног рада:]
 
-  #rect(width: 100%, stroke: _medium, height: 0.7fr, inset: 0.67em, outset: 0pt)[
+  #rect(width: 100%, stroke: _medium, inset: (x: 0.67em, y: 1em), outset: 0pt)[
     #align(center + horizon, strong(if title == auto { context document.title } else { title }))
   ]
 
