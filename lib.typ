@@ -249,12 +249,20 @@
       show heading: hide
       show heading: align.with(center + horizon)
       set par(justify: false)
-      show par: place.with(center + horizon)
-      set text(style: "italic", discretionary-ligatures: true, features: ("swsh",))
+      set text(
+        1.3em,
+        style: "italic",
+        weight: "light",
+        discretionary-ligatures: true,
+        features: (
+          "swsh",
+        ),
+      )
 
       [= Посвета]
-
-      dedication
+      place(center + horizon)[
+        #dedication
+      ]
     } else { dedication }
 
     if type(acknowledgement) in (str, bytes) [
