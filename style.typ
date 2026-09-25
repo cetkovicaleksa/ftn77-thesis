@@ -31,7 +31,7 @@
   sans-font: ("Arial", "Liberation Sans"),
   logo-scale: auto,
   margin: auto,
-  fill: none,
+  fill: auto,
   text-fill: black,
 ) = context {
   set page(footer: none, header: none, fill: fill)
