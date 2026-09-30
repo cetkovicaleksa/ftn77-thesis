@@ -27,7 +27,7 @@
   title-size: auto,
   title-outlined: false,
   title-bookmarked: true,
-  body-font: ("Times New Roman", "Liberation Serif"),
+  body-font: ("Arial", "Liberation Sans"),
   sans-font: ("Arial", "Liberation Sans"),
   logo-scale: auto,
   margin: auto,
